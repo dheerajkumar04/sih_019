@@ -20,7 +20,7 @@ class JSONEncoder(json.JSONEncoder):
 
 @app.route('/')
 def home():
-    return render_template('student.html')
+    return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def login():
