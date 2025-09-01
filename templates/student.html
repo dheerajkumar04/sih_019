@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | EduPlatform</title>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 200px;
+      padding: 16px;
+      margin: 10px;
+      display: inline-block;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>EduPlatform Login</h2>
+    <p>hello this is dummy page</p>
+    <div id="cards-container"></div>
+    <button class="login-btn" onclick="showDetails()">Login</button>
+  </div>
+
+  <script>
+    function showDetails(){
+      fetch("/get_content", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 'lsn':'lsn1', 'cp':'cp1' })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("cards-container");
+
+        data.forEach(card => {
+          const cardDiv = document.createElement("div");
+          cardDiv.className = "card";
+
+          cardDiv.innerHTML = `
+            <h3>Card #${card.cardno}</h3>
+            <img src="${card.image_url}" alt="Card Image">
+            <p>${card.info}</p>
+          `;
+
+          container.appendChild(cardDiv);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching cards:", error);
+      });
+    }
+  </script>
+
+</body>
+</html>
