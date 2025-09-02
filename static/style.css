@@ -84,23 +84,23 @@ body {
 
 /* HEADERS CARD */
 .headers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;  /* text left, options right */
+  align-items: center;            /* make children same height */
   background: linear-gradient(120deg, #f9fafb 90%, #dbeafe 100%);
   border-radius: 14px;
-  padding: 30px 20px;
-  text-align: left;
+  padding: 10px 20px;
   box-shadow: 0 2px 8px rgba(17, 24, 39, .07);
   border: 1px solid #dbeafe;
   margin-left: -20px;
 }
-.headers h1 {
+
+.headers h2 {
+  flex: 5;
   font-size: 2.2em;
   color: #1e3a8a;
-  margin-bottom: 12px;
   font-weight: 700;
-}
-.headers p {
-  font-size: 1.08em;
-  color: #475569;
 }
 
 /* LESSONS GRID */
@@ -129,22 +129,27 @@ body {
   transition: transform 0.22s cubic-bezier(.64,.09,.08,.87), box-shadow 0.32s cubic-bezier(.64,.09,.08,.87);
   position: relative;
   overflow: hidden;
+  animation: fadeInUp 0.5s ease both;
+  
 }
 .lesson-card:hover {
   transform: translateY(-4px) scale(1.024);
   box-shadow: 0 8px 28px rgba(16,185,129,0.12), 0 6px 16px rgba(59,130,246,.14);
 }
 .lesson-card h3 {
+  display: inline;
   margin-bottom: 10px;
   font-weight: 600;
-  color: #2563eb;
+  color: beige;
   font-size: 1.16em;
+   background-image: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(255, 0, 0, 0) 95%);
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-.lesson-card p {
-  color: #64748b;
-  font-size: 1.05em;
-}
+
 .lesson-card button {
+  float: right;
   margin-top: 15px;
   padding: 10px 20px;
   background: linear-gradient(90deg, #3b82f6 75%, #6366f1 100%);
@@ -157,8 +162,76 @@ body {
   box-shadow: 0 2px 8px rgba(59,130,246,.16);
   transition: background 0.3s, box-shadow 0.28s;
 }
+
 .lesson-card button:hover {
   background: linear-gradient(90deg, #2563eb 85%, #818cf8 100%);
   box-shadow: 0 4px 14px rgba(59,130,246,.19);
 }
+html {
+  scroll-behavior: smooth;
+}
+.lesson-card::before {
+  content: "📘";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.6em;
+  opacity: 0.25;
+}
+.sidebar {
+  transition: all 0.4s ease;
+}
+.sidebar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(59,130,246,0.18);
+}
 
+
+#c1{
+background-image: url("../static/lsn1.jpg");
+  background-blend-mode: darken;
+  background-repeat: no-repeat; /* prevent tiling */
+  background-position: center;  /* center the image */
+  background-size: 700px auto;
+}
+#c2{
+  background-image: url("../static/c2.jpg");
+  
+  background-repeat: no-repeat; /* prevent tiling */
+  background-position: center;  /* center the image */
+  background-size: 700px 125%;
+  opacity: 90%;
+
+}
+
+.options {
+  flex: 4; /* takes less space */
+  display: flex;
+  justify-content: center;
+  height: 85px;
+  
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  border-radius: 14px;
+  /* box-shadow: 0 2px 8px rgba(17, 24, 39, .07); */
+  /* border: 1px solid #dbeafe; */
+}
+
+.option-item {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  color: #2563eb;
+  box-shadow: 0 2px 6px rgba(59,130,246,.12);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.option-item:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(59,130,246,.18);
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+}
