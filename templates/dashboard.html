@@ -9,7 +9,9 @@
 <body>
   <div class="sidebar">
     <div class="profile">
-      <img src="../static/profile_pic.webp" alt="Profile Picture" class="profile-pic">
+        <div >
+        <img src="../static/profile_pic.webp" alt="Profile Picture" class="profile-pic">
+        </div>
       <h2 class="username">John Doe</h2>
       <p class="role">Student</p>
     </div>
@@ -20,19 +22,24 @@
 
   <div class="main-content">
     <div class="headers">
-      <h1>Welcome back, John!</h1>
-      <p>Here's your learning dashboard.</p>
+      <h2>Welcome back, John!</h2>
+      
+      <div class="options">
+        <div class="option-item">🔥 Daily Quest</div>
+        <div class="option-item">🧠 Quiz of the Day</div>
+        <div class="option-item">🏆 Achievements</div>
+        <div class="option-item">⭐ Bookmarks</div>
+      </div>
     </div>
     <div class="lessons">
-      <div class="lesson-card">
+      <div class="lesson-card" id="c1">
+        
         <h3>Math - Algebra Basics</h3>
-        <p>Continue where you left off</p>
-        <button>Resume</button>
+        <button id="l1">Resume</button>
       </div>
-      <div class="lesson-card">
+      <div class="lesson-card" id="c2">
         <h3>Science - Biology</h3>
-        <p>Chapter 2: Cells and Functions</p>
-        <button>Start</button>
+        <button id="l2">Start</button>
       </div>
     </div>
   </div>
