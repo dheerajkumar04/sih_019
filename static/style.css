@@ -1,0 +1,164 @@
+/* RESET & GLOBAL */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+body {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(120deg, #e5e7eb 0%, #e0e7ff 100%);
+  padding: 32px;
+  gap: 32px;
+}
+
+/* SIDEBAR COLUMN */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 32px;
+  background: linear-gradient(126deg, #eff6ff 75%, #dbeafe 100%);
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(60, 120, 255, 0.09);
+  padding: 24px 16px;
+  border: 1px solid #93c5fd;
+}
+
+/* PROFILE CARD */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0;
+  background: linear-gradient(110deg, #f0faff 85%, #baeff8 100%);
+  border-radius: 12px;
+  border: 1px solid #a5f3fc;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.11);
+}
+.profile-pic {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 3px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(59,130,246,.16);
+}
+.username {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #2563eb;
+}
+.role {
+  font-size: 1em;
+  color: #6366f1;
+  background: #e0e7ff;
+  padding: 2px 10px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+/* PROGRESS CARD */
+.progress {
+  padding: 18px 0;
+  background: linear-gradient(96deg, #ecfdf5 75%, #d1fae5 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.10);
+  border: 1px solid #bbf7d0;
+  height: 100%;
+  margin-top: -20px;
+}
+
+.progress h3{
+    text-align  : center;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* HEADERS CARD */
+.headers {
+  background: linear-gradient(120deg, #f9fafb 90%, #dbeafe 100%);
+  border-radius: 14px;
+  padding: 30px 20px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, .07);
+  border: 1px solid #dbeafe;
+  margin-left: -20px;
+}
+.headers h1 {
+  font-size: 2.2em;
+  color: #1e3a8a;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.headers p {
+  font-size: 1.08em;
+  color: #475569;
+}
+
+/* LESSONS GRID */
+.lessons {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(120deg, #f9fafb 90%, #dbeafe 100%);
+  border-radius: 14px;
+  margin-left: -20px;
+  margin-top: -20px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, .07);
+  border: 1px solid #dbeafe;
+  height: 100%;
+}
+
+/* LESSON CARDS */
+.lesson-card {
+  background: linear-gradient(120deg, #f9fafb 70%, #fff 100%);
+  border: 1px solid #c7d2fe;
+  border-radius: 14px;
+  margin: 25px 100px;
+  margin-bottom: 0px;
+  padding: 25px 22px;
+  box-shadow: 0 2px 16px rgba(59,130,246,.07), 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.22s cubic-bezier(.64,.09,.08,.87), box-shadow 0.32s cubic-bezier(.64,.09,.08,.87);
+  position: relative;
+  overflow: hidden;
+}
+.lesson-card:hover {
+  transform: translateY(-4px) scale(1.024);
+  box-shadow: 0 8px 28px rgba(16,185,129,0.12), 0 6px 16px rgba(59,130,246,.14);
+}
+.lesson-card h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 1.16em;
+}
+.lesson-card p {
+  color: #64748b;
+  font-size: 1.05em;
+}
+.lesson-card button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #3b82f6 75%, #6366f1 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1em;
+  box-shadow: 0 2px 8px rgba(59,130,246,.16);
+  transition: background 0.3s, box-shadow 0.28s;
+}
+.lesson-card button:hover {
+  background: linear-gradient(90deg, #2563eb 85%, #818cf8 100%);
+  box-shadow: 0 4px 14px rgba(59,130,246,.19);
+}
+
