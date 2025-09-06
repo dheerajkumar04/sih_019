@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | EduPlatform</title>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 200px;
+      padding: 16px;
+      margin: 10px;
+      display: inline-block;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>EduPlatform Login</h2>
+    <p>hello this is dummy page</p>
+    <select id="languageSelect" onchange="showDetails()">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="hi">Hindi</option>
+      <option value="te">Telugu</option>
+    </select>
+
+
+    <div id="cards-container"></div>
+    <button class="login-btn" onclick="redi()">load details</button>
+  </div>
+
+  <script>
+    function redi(){
+      window.location.href = '/lsn';
+    }
+    async function changeLanguage(card) {
+      const translateFrom = "en";
+      const translateTo = document.getElementById("languageSelect").value;
+      const encodedText = encodeURIComponent(card);
+
+      if (translateFrom==translateTo){
+        return card;
+      }
+
+      let apikey = 'enter a valid mymemory email';
+
+      const apiUrl = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=${translateFrom}|${translateTo}`;
+
+      try {
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+
+        let translatedText = data.responseData.translatedText;
+
+        // Return modified card
+        return translatedText;
+      } catch (error) {
+        console.error("Translation error:", error);
+        return card; // Fallback to original
+      }
+    }
+
+    async function showDetails() {
+      const container = document.getElementById("cards-container");
+      container.innerHTML = "";  // Clear any existing cards
+
+      try {
+        const response = await fetch("/get_content", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ 'lsn': 'lsn1', 'cp': 'cp6' })
+        });
+
+        const data = await response.json();
+
+        for (const card of data) {
+          const cardDiv = document.createElement("div");
+          cardDiv.className = "card";
+
+          // ✅ Wait for translation
+          const translatedInfo = await changeLanguage(card.info);
+
+          cardDiv.innerHTML = `
+            <h3>Card #${card.cardno}</h3>
+            <img src="data:image/jpeg;base64,${card.image_base64}" alt="Card Image">
+            <p>${translatedInfo}</p>
+          `;
+
+          container.appendChild(cardDiv);
+        }
+
+      } catch (error) {
+        console.error("Error fetching cards:", error);
+      }
+    }
+
+    
+  </script>
+
+</body>
+</html>
