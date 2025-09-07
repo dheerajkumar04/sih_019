@@ -1,0 +1,290 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Highlight the active navigation link based on the current page URL
+    const navLinks = document.querySelectorAll('.options .option-item');
+    const path = window.location.pathname.split('/').pop();
+
+    if (path) {
+        navLinks.forEach(link => {
+            if (link.href.includes(path)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // 2. Animate the main progress bar in the sidebar
+    const progressBar = document.querySelector('.progress-bar-fill');
+    if (progressBar) {
+        const targetWidth = progressBar.style.width;
+        progressBar.style.width = '0%';
+        setTimeout(() => {
+            progressBar.style.width = targetWidth;
+        }, 300);
+    }
+
+    // 3. Animate the bars in the Daily Progress Graph on the Achievements page
+    const chartBars = document.querySelectorAll('.chart-bar');
+    if (chartBars.length > 0) {
+        chartBars.forEach((bar, index) => {
+            const targetHeight = bar.style.height;
+            bar.style.height = '0%';
+            setTimeout(() => {
+                bar.style.height = targetHeight;
+            }, 300 + index * 100);
+        });
+    }
+
+    // 4. Add interactive hover effects to profile picture and other elements
+    const profilePic = document.querySelector('.profile-pic');
+    if (profilePic) {
+        profilePic.addEventListener('mouseenter', () => {
+            profilePic.style.transform = 'scale(1.05) rotate(5deg)';
+        });
+        profilePic.addEventListener('mouseleave', () => {
+            profilePic.style.transform = 'scale(1) rotate(0deg)';
+        });
+    }
+
+    // 5. Add a simple hover effect to lesson cards
+    const lessonCards = document.querySelectorAll('.lesson-card');
+    if (lessonCards.length > 0) {
+        lessonCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('hovered');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('hovered');
+            });
+        });
+    }
+    
+    //-----------------------------------------------------
+    // 6. QUIZ LOGIC - NEW FUNCTIONALITY
+    //-----------------------------------------------------
+    
+    // Define the quiz questions and answers
+    const quizData = {
+        kinematics: [
+            {
+                question: "What is the study of motion without considering its causes?",
+                options: ["Dynamics", "Statics", "Kinematics", "Thermodynamics"],
+                answer: "Kinematics"
+            },
+            {
+                question: "Which of the following is a scalar quantity?",
+                options: ["Velocity", "Displacement", "Acceleration", "Speed"],
+                answer: "Speed"
+            },
+            {
+                question: "The rate of change of velocity is called:",
+                options: ["Displacement", "Acceleration", "Force", "Momentum"],
+                answer: "Acceleration"
+            },
+            {
+                question: "A car travels 50 km east, then 50 km west. What is its displacement?",
+                options: ["100 km", "50 km west", "0 km", "50 km east"],
+                answer: "0 km"
+            },
+            {
+                question: "The first equation of motion relates:",
+                options: ["Velocity, acceleration, and time", "Distance, velocity, and time", "Force, mass, and acceleration", "Energy and work"],
+                answer: "Velocity, acceleration, and time"
+            },
+            {
+                question: "A body is in uniform motion if it travels:",
+                options: ["Equal distances in equal time intervals", "Unequal distances in equal time intervals", "Equal distances in unequal time intervals", "Any distance in any time interval"],
+                answer: "Equal distances in equal time intervals"
+            },
+            {
+                question: "What does the slope of a velocity-time graph represent?",
+                options: ["Displacement", "Distance", "Speed", "Acceleration"],
+                answer: "Acceleration"
+            },
+            {
+                question: "The maximum height of a projectile is directly proportional to the square of its:",
+                options: ["Initial velocity", "Time of flight", "Angle of projection", "Horizontal range"],
+                answer: "Initial velocity"
+            },
+            {
+                question: "In free fall, an object's acceleration is constant and equal to:",
+                options: ["The object's mass", "The force of air resistance", "The gravitational acceleration (g)", "Zero"],
+                answer: "The gravitational acceleration (g)"
+            },
+            {
+                question: "Which of the following represents a change in motion?",
+                options: ["Constant speed", "Uniform velocity", "Zero acceleration", "Non-zero acceleration"],
+                answer: "Non-zero acceleration"
+            }
+        ],
+        biology: [
+            { question: "What is the powerhouse of the cell?", options: ["Nucleus", "Mitochondria", "Ribosome", "Cytoplasm"], answer: "Mitochondria" }
+        ],
+        calculus: [
+            { question: "What is the integral of x^2?", options: ["2x", "x^3/3", "x^3", "x"], answer: "x^3/3" }
+        ],
+        computers: [
+            {
+                question: "Which component is considered the 'brain' of the computer?",
+                options: ["RAM", "Motherboard", "CPU", "Hard Drive"],
+                answer: "CPU"
+            },
+            {
+                question: "What does HTML stand for?",
+                options: ["Hyper Text Markup Language", "Hyperlink and Text Markup Language", "High-Level Text Machine Language", "Home Tool Markup Language"],
+                answer: "Hyper Text Markup Language"
+            },
+            {
+                question: "Which of these is a type of non-volatile memory?",
+                options: ["RAM", "Cache", "ROM", "Registers"],
+                answer: "ROM"
+            },
+            {
+                question: "What is the primary function of an operating system?",
+                options: ["To manage computer hardware and software resources", "To create documents", "To browse the internet", "To edit photos"],
+                answer: "To manage computer hardware and software resources"
+            },
+            {
+                question: "What is a 'bug' in computer programming?",
+                options: ["A type of virus", "An error or flaw in a program", "A hardware component", "A graphical interface"],
+                answer: "An error or flaw in a program"
+            },
+            {
+                question: "Which port is commonly used for connecting a mouse or keyboard?",
+                options: ["HDMI", "USB", "Ethernet", "VGA"],
+                answer: "USB"
+            },
+            {
+                question: "What does 'IP' stand for in 'IP address'?",
+                options: ["Internet Protocol", "Internal Program", "Information Packet", "Integrated Platform"],
+                answer: "Internet Protocol"
+            },
+            {
+                question: "A collection of web pages and related content that is identified by a common domain name is called a:",
+                options: ["Web server", "Website", "Search engine", "Network"],
+                answer: "Website"
+            },
+            {
+                question: "What is the smallest unit of data in a computer?",
+                options: ["Byte", "Kilobyte", "Bit", "Gigabyte"],
+                answer: "Bit"
+            },
+            {
+                question: "The process of converting code into an executable program is called:",
+                options: ["Debugging", "Compiling", "Executing", "Interpreting"],
+                answer: "Compiling"
+            }
+        ]
+    };
+
+    const quizListSection = document.querySelector('.quiz-list');
+    const quizContainerSection = document.getElementById('quiz-container');
+    const quizResultsSection = document.getElementById('quiz-results');
+    const quizQuestionsContainer = document.getElementById('quiz-questions');
+    const quizTitle = document.getElementById('quiz-title');
+    const submitQuizBtn = document.getElementById('submit-quiz-btn');
+    const finalScore = document.getElementById('final-score');
+    const totalQuestions = document.getElementById('total-questions');
+    const retakeQuizBtn = document.getElementById('retake-quiz-btn');
+    const backToQuizzesBtn = document.getElementById('back-to-quizzes-btn');
+    
+    let currentQuizData = [];
+    let selectedAnswers = {};
+
+    // Handles the "Take Quiz" button click
+    document.querySelectorAll('.start-quiz-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const quizId = event.target.closest('.quiz-item').dataset.quiz;
+            currentQuizData = quizData[quizId];
+            selectedAnswers = {};
+            
+            quizListSection.style.display = 'none';
+            quizResultsSection.style.display = 'none';
+            quizContainerSection.style.display = 'block';
+
+            renderQuiz(quizId);
+        });
+    });
+
+    // Function to generate the quiz questions dynamically
+    function renderQuiz(quizId) {
+        quizTitle.textContent = `Quiz on ${quizId.charAt(0).toUpperCase() + quizId.slice(1)}`;
+        quizQuestionsContainer.innerHTML = '';
+        currentQuizData.forEach((item, index) => {
+            const questionCard = document.createElement('div');
+            questionCard.classList.add('question-card');
+            questionCard.innerHTML = `
+                <p>${index + 1}. ${item.question}</p>
+                <ul class="options-list">
+                    ${item.options.map(option => `<li data-option="${option}">${option}</li>`).join('')}
+                </ul>
+            `;
+            quizQuestionsContainer.appendChild(questionCard);
+        });
+
+        // Add event listeners for option selection
+        document.querySelectorAll('.options-list li').forEach(option => {
+            option.addEventListener('click', (event) => {
+                const questionCard = event.target.closest('.question-card');
+                const optionsList = questionCard.querySelector('.options-list');
+                const questionIndex = Array.from(questionCard.parentNode.children).indexOf(questionCard);
+                
+                // Remove 'selected' class from other options in the same question
+                optionsList.querySelectorAll('li').forEach(li => li.classList.remove('selected'));
+                
+                // Add 'selected' class to the clicked option
+                event.target.classList.add('selected');
+                
+                // Store the selected answer
+                selectedAnswers[questionIndex] = event.target.dataset.option;
+            });
+        });
+    }
+
+    // Handles the "Submit Quiz" button click
+    submitQuizBtn.addEventListener('click', () => {
+        let score = 0;
+        const questionsList = quizQuestionsContainer.querySelectorAll('.question-card');
+        
+        questionsList.forEach((card, index) => {
+            const userAnswer = selectedAnswers[index];
+            const correctAnswer = currentQuizData[index].answer;
+            const options = card.querySelectorAll('.options-list li');
+            
+            options.forEach(option => {
+                // Show the correct answer
+                if (option.dataset.option === correctAnswer) {
+                    option.classList.add('correct');
+                }
+                // Check user's answer
+                if (option.dataset.option === userAnswer && userAnswer !== correctAnswer) {
+                    option.classList.add('incorrect');
+                }
+                option.style.pointerEvents = 'none'; // Disable further clicks
+            });
+            
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+        });
+        
+        // Hide quiz, show results
+        quizContainerSection.style.display = 'none';
+        quizResultsSection.style.display = 'block';
+        finalScore.textContent = score;
+        totalQuestions.textContent = currentQuizData.length;
+    });
+
+    // Handles the "Retake Quiz" button click
+    retakeQuizBtn.addEventListener('click', () => {
+        quizResultsSection.style.display = 'none';
+        quizContainerSection.style.display = 'block';
+        selectedAnswers = {};
+        renderQuiz(Object.keys(quizData).find(key => quizData[key] === currentQuizData));
+    });
+
+    // Handles the "Back to Quizzes" button click
+    backToQuizzesBtn.addEventListener('click', () => {
+        quizResultsSection.style.display = 'none';
+        quizListSection.style.display = 'block';
+    });
+});
