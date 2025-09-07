@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bookmarks - Student Dashboard</title>
+    <link rel="stylesheet" href="style4.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="profile">
+                <img class="profile-pic" src="https://placehold.co/150x150/667eea/ffffff?text=User" alt="User Profile Picture" />
+                <span class="username">Alex Johnson</span>
+                <span class="role">Student</span>
+            </div>
+            <div class="sidebar-section stats-summary">
+                <h3>Quick Stats</h3>
+                <div class="stat-item"><span class="stat-label">Courses</span><span class="stat-value">5</span></div>
+                <div class="stat-item"><span class="stat-label">Completed</span><span class="stat-value">3</span></div>
+                <div class="stat-item"><span class="stat-label">Next Quiz</span><span class="stat-value">Tomorrow</span></div>
+            </div>
+            <div class="sidebar-section">
+                <h3>My Progress</h3>
+                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 70%;"></div></div>
+                <div class="progress-text">70% Completion</div>
+            </div>
+            <div class="sidebar-section">
+                <h3>Recent Activity</h3>
+                <ul class="activity-list">
+                    <li><i class="fas fa-check-circle"></i> Completed "Intro to Biology" Quiz</li>
+                    <li><i class="fas fa-book-open"></i> Started "World History" Lesson 3</li>
+                    <li><i class="fas fa-star"></i> Earned "Problem Solver" Badge</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="headers">
+                <h2>Bookmarks</h2>
+                <nav class="options">
+                    <a href="lessons.html" class="option-item">Lessons</a>
+                    <a href="quizzes.html" class="option-item">Quizzes</a>
+                    <a href="achievements.html" class="option-item">Achievements</a>
+                    <a href="bookmarks.html" class="option-item">Bookmarks</a>
+                </nav>
+            </header>
+
+            <div class="content-wrapper">
+                <section id="bookmarks" class="content-section">
+                    <h3>My Bookmarked Lessons</h3>
+                    <div class="bookmark-item">
+                        <i class="fas fa-bookmark bookmark-icon"></i>
+                        <h4>"Intro to Thermodynamics"</h4>
+                        <p>Saved from Chemistry course.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
