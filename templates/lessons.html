@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - EduNabha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: #667eea;
+        }
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .navbar .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        .navbar .points {
+            background: #ffd700;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .page-title {
+            font-size: 2rem;
+            color: #333;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        .tab:hover {
+            color: #667eea;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+        .lesson-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+        }
+        .lesson-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .lesson-class {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .lesson-body {
+            padding: 1.5rem;
+        }
+        .lesson-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .lesson-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .lesson-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .lesson-actions .btn {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e1e5e9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+        }
+        .modal-body {
+            padding: 1.5rem;
+        }
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e1e5e9;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        .empty-state i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+        .empty-state h3 {
+            margin-bottom: 0.5rem;
+        }
+        .filter-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1001;
+        }
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .notification.success {
+            border-left: 4px solid #55efc4;
+        }
+        .notification.error {
+            border-left: 4px solid #ff6b6b;
+        }
+        .notification-icon {
+            font-size: 1.5rem;
+        }
+        .notification.success .notification-icon {
+            color: #55efc4;
+        }
+        .notification.error .notification-icon {
+            color: #ff6b6b;
+        }
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .logout-btn:hover {
+            background: #ff5252;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .navbar .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .page-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .filter-section {
+                flex-direction: column;
+            }
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>🎓</span>
+            EduNabha
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="lessons.html" class="active">Lessons</a></li>
+            <li><a href="grades.html">Grades</a></li>
+            <li><a href="reports.html">Reports</a></li>
+        </ul>
+        <div class="user-info">
+            <div class="user-avatar" id="userAvatar">T</div>
+            <span id="username">Teacher</span>
+            <div class="points" id="userPoints">⭐ 0</div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Lessons Management</h1>
+            <button class="btn btn-primary" onclick="openCreateLessonModal()">
+                <i class="fas fa-plus"></i> Create New Lesson
+            </button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('all-lessons')">All Lessons</button>
+            <button class="tab" onclick="switchTab('published')">Published</button>
+            <button class="tab" onclick="switchTab('drafts')">Drafts</button>
+            <button class="tab" onclick="switchTab('archived')">Archived</button>
+        </div>
+
+        <div id="all-lessons" class="content-section active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">All Lessons</h2>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <input type="text" class="form-control" placeholder="Search lessons..." id="searchLessons">
+                    </div>
+                    <div class="filter-group">
+                        <select class="form-control" id="filterClass">
+                            <option value="">All Classes</option>
+                            <option value="math101">Mathematics 101</option>
+                            <option value="science101">Science Fundamentals</option>
+                            <option value="literature101">Literature & Writing</option>
+                            <option value="cs101">Computer Science</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select class="form-control" id="sortBy">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="title">Title (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="lessons-grid" id="lessonsGrid">
+                    <!-- Lessons will be dynamically loaded here -->
+                </div>
+                
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-book-open"></i>
+                    <h3>No lessons found</h3>
+                    <p>Create your first lesson to get started</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="published" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Published Lessons</h2>
+                </div>
+                <div class="lessons-grid" id="publishedLessonsGrid">
+                    <!-- Published lessons will be loaded here -->
+                </div>
+                <div class="empty-state" id="publishedEmptyState">
+                    <i class="fas fa-globe"></i>
+                    <h3>No published lessons</h3>
+                    <p>Publish a lesson to make it available to students</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="drafts" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Draft Lessons</h2>
+                </div>
+                <div class="lessons-grid" id="draftsLessonsGrid">
+                    <!-- Draft lessons will be loaded here -->
+                </div>
+                <div class="empty-state" id="draftsEmptyState">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>No draft lessons</h3>
+                    <p>Create a draft lesson to work on it later</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="archived" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Archived Lessons</h2>
+                </div>
+                <div class="lessons-grid" id="archivedLessonsGrid">
+                    <!-- Archived lessons will be loaded here -->
+                </div>
+                <div class="empty-state" id="archivedEmptyState">
+                    <i class="fas fa-archive"></i>
+                    <h3>No archived lessons</h3>
+                    <p>Archive lessons you no longer use</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Edit Lesson Modal -->
+    <div class="modal" id="lessonModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Create New Lesson</h3>
+                <button class="modal-close" onclick="closeLessonModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="lessonForm">
+                    <div class="form-group">
+                        <label class="form-label" for="lessonTitle">Lesson Title</label>
+                        <input type="text" class="form-control" id="lessonTitle" placeholder="Enter lesson title" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="lessonClass">Class</label>
+                            <select class="form-control" id="lessonClass" required>
+                                <option value="">Select a class</option>
+                                <option value="math101">Mathematics 101</option>
+                                <option value="science101">Science Fundamentals</option>
+                                <option value="literature101">Literature & Writing</option>
+                                <option value="cs101">Computer Science</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="lessonDueDate">Due Date</label>
+                            <input type="date" class="form-control" id="lessonDueDate">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="lessonDescription">Description</label>
+                        <textarea class="form-control" id="lessonDescription" placeholder="Enter lesson description" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="lessonContent">Lesson Content</label>
+                        <textarea class="form-control" id="lessonContent" placeholder="Enter lesson content" rows="8" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="lessonStatus">Status</label>
+                        <select class="form-control" id="lessonStatus">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeLessonModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveLesson()">Save Lesson</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-message">
+            Lesson saved successfully!
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        const currentUser = JSON.parse(localStorage.getItem('currentTeacher'));
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+        
+        // Load teacher data
+        function loadTeacherData() {
+            const teachers = JSON.parse(localStorage.getItem('eduNabhaTeachers') || '[]');
+            const teacher = teachers.find(t => t.id === currentUser.id) || currentUser;
+            
+            // Update navbar
+            document.getElementById('userAvatar').textContent = teacher.username.charAt(0).toUpperCase();
+            document.getElementById('username').textContent = teacher.username;
+            document.getElementById('userPoints').textContent = `⭐ ${teacher.totalPoints || 0}`;
+        }
+        
+        // Initialize lessons data
+        let lessons = JSON.parse(localStorage.getItem('eduNabhaLessons') || '[]');
+        let currentEditingLessonId = null;
+        
+        // Load lessons
+        function loadLessons() {
+            const teacherLessons = lessons.filter(lesson => lesson.teacherId === currentUser.id);
+            
+            // Filter lessons based on active tab
+            const activeTab = document.querySelector('.tab.active').textContent.trim();
+            let filteredLessons = [...teacherLessons];
+            
+            if (activeTab === 'Published') {
+                filteredLessons = teacherLessons.filter(lesson => lesson.status === 'published');
+            } else if (activeTab === 'Drafts') {
+                filteredLessons = teacherLessons.filter(lesson => lesson.status === 'draft');
+            } else if (activeTab === 'Archived') {
+                filteredLessons = teacherLessons.filter(lesson => lesson.status === 'archived');
+            }
+            
+            // Apply search filter
+            const searchTerm = document.getElementById('searchLessons').value.toLowerCase();
+            if (searchTerm) {
+                filteredLessons = filteredLessons.filter(lesson => 
+                    lesson.title.toLowerCase().includes(searchTerm) || 
+                    lesson.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Apply class filter
+            const classFilter = document.getElementById('filterClass').value;
+            if (classFilter) {
+                filteredLessons = filteredLessons.filter(lesson => lesson.classId === classFilter);
+            }
+            
+            // Apply sorting
+            const sortBy = document.getElementById('sortBy').value;
+            if (sortBy === 'newest') {
+                filteredLessons.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            } else if (sortBy === 'oldest') {
+                filteredLessons.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+            } else if (sortBy === 'title') {
+                filteredLessons.sort((a, b) => a.title.localeCompare(b.title));
+            }
+            
+            // Display lessons
+            displayLessons(filteredLessons, activeTab);
+        }
+        
+        // Display lessons in the grid
+        function displayLessons(lessonsToDisplay, tab) {
+            let gridId = 'lessonsGrid';
+            let emptyStateId = 'emptyState';
+            
+            if (tab === 'Published') {
+                gridId = 'publishedLessonsGrid';
+                emptyStateId = 'publishedEmptyState';
+            } else if (tab === 'Drafts') {
+                gridId = 'draftsLessonsGrid';
+                emptyStateId = 'draftsEmptyState';
+            } else if (tab === 'Archived') {
+                gridId = 'archivedLessonsGrid';
+                emptyStateId = 'archivedEmptyState';
+            }
+            
+            const grid = document.getElementById(gridId);
+            const emptyState = document.getElementById(emptyStateId);
+            
+            grid.innerHTML = '';
+            
+            if (lessonsToDisplay.length === 0) {
+                emptyState.style.display = 'block';
+                grid.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                grid.style.display = 'grid';
+                
+                lessonsToDisplay.forEach(lesson => {
+                    const lessonCard = createLessonCard(lesson);
+                    grid.appendChild(lessonCard);
+                });
+            }
+        }
+        
+        // Create a lesson card element
+        function createLessonCard(lesson) {
+            const card = document.createElement('div');
+            card.className = 'lesson-card';
+            
+            const classNames = {
+                'math101': 'Mathematics 101',
+                'science101': 'Science Fundamentals',
+                'literature101': 'Literature & Writing',
+                'cs101': 'Computer Science'
+            };
+            
+            const statusColors = {
+                'draft': '#fdcb6e',
+                'published': '#55efc4',
+                'archived': '#a29bfe'
+            };
+            
+            const statusLabels = {
+                'draft': 'Draft',
+                'published': 'Published',
+                'archived': 'Archived'
+            };
+            
+            card.innerHTML = `
+                <div class="lesson-header">
+                    <div class="lesson-title">${lesson.title}</div>
+                    <div class="lesson-class">${classNames[lesson.classId] || 'Unknown Class'}</div>
+                </div>
+                <div class="lesson-body">
+                    <div class="lesson-description">${lesson.description}</div>
+                    <div class="lesson-meta">
+                        <span>Created: ${new Date(lesson.createdAt).toLocaleDateString()}</span>
+                        <span style="color: ${statusColors[lesson.status]}; font-weight: 600;">
+                            ${statusLabels[lesson.status]}
+                        </span>
+                    </div>
+                    ${lesson.dueDate ? `
+                    <div class="lesson-meta">
+                        <span>Due: ${new Date(lesson.dueDate).toLocaleDateString()}</span>
+                    </div>
+                    ` : ''}
+                    <div class="lesson-actions">
+                        <button class="btn btn-secondary" onclick="viewLesson('${lesson.id}')">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-secondary" onclick="editLesson('${lesson.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        ${lesson.status !== 'archived' ? `
+                        <button class="btn btn-danger" onclick="archiveLesson('${lesson.id}')">
+                            <i class="fas fa-archive"></i> Archive
+                        </button>
+                        ` : `
+                        <button class="btn btn-secondary" onclick="restoreLesson('${lesson.id}')">
+                            <i class="fas fa-undo"></i> Restore
+                        </button>
+                        `}
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Switch between tabs
+        function switchTab(tabId) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update active content section
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            // Reload lessons for the active tab
+            loadLessons();
+        }
+        
+        // Open create lesson modal
+        function openCreateLessonModal() {
+            currentEditingLessonId = null;
+            document.getElementById('modalTitle').textContent = 'Create New Lesson';
+            document.getElementById('lessonForm').reset();
+            document.getElementById('lessonModal').classList.add('active');
+        }
+        
+        // Close lesson modal
+        function closeLessonModal() {
+            document.getElementById('lessonModal').classList.remove('active');
+        }
+        
+        // Save lesson
+        function saveLesson() {
+            const title = document.getElementById('lessonTitle').value;
+            const classId = document.getElementById('lessonClass').value;
+            const dueDate = document.getElementById('lessonDueDate').value;
+            const description = document.getElementById('lessonDescription').value;
+            const content = document.getElementById('lessonContent').value;
+            const status = document.getElementById('lessonStatus').value;
+            
+            if (!title || !classId || !description || !content) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            if (currentEditingLessonId) {
+                // Update existing lesson
+                const lessonIndex = lessons.findIndex(l => l.id === currentEditingLessonId);
+                if (lessonIndex !== -1) {
+                    lessons[lessonIndex] = {
+                        ...lessons[lessonIndex],
+                        title,
+                        classId,
+                        dueDate,
+                        description,
+                        content,
+                        status,
+                        updatedAt: new Date().toISOString()
+                    };
+                }
+            } else {
+                // Create new lesson
+                const newLesson = {
+                    id: 'lesson_' + Date.now(),
+                    teacherId: currentUser.id,
+                    title,
+                    classId,
+                    dueDate,
+                    description,
+                    content,
+                    status,
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                };
+                lessons.push(newLesson);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('eduNabhaLessons', JSON.stringify(lessons));
+            
+            // Close modal and reload lessons
+            closeLessonModal();
+            loadLessons();
+            showNotification('Lesson saved successfully!', 'success');
+        }
+        
+        // Edit lesson
+        function editLesson(lessonId) {
+            const lesson = lessons.find(l => l.id === lessonId);
+            if (!lesson) return;
+            
+            currentEditingLessonId = lessonId;
+            document.getElementById('modalTitle').textContent = 'Edit Lesson';
+            document.getElementById('lessonTitle').value = lesson.title;
+            document.getElementById('lessonClass').value = lesson.classId;
+            document.getElementById('lessonDueDate').value = lesson.dueDate || '';
+            document.getElementById('lessonDescription').value = lesson.description;
+            document.getElementById('lessonContent').value = lesson.content;
+            document.getElementById('lessonStatus').value = lesson.status;
+            
+            document.getElementById('lessonModal').classList.add('active');
+        }
+        
+        // View lesson
+        function viewLesson(lessonId) {
+            const lesson = lessons.find(l => l.id === lessonId);
+            if (!lesson) return;
+            
+            // In a real application, this would open a detailed view
+            alert(`Viewing lesson: ${lesson.title}\n\n${lesson.description}`);
+        }
+        
+        // Archive lesson
+        function archiveLesson(lessonId) {
+            const lessonIndex = lessons.findIndex(l => l.id === lessonId);
+            if (lessonIndex !== -1) {
+                lessons[lessonIndex].status = 'archived';
+                lessons[lessonIndex].updatedAt = new Date().toISOString();
+                localStorage.setItem('eduNabhaLessons', JSON.stringify(lessons));
+                loadLessons();
+                showNotification('Lesson archived successfully!', 'success');
+            }
+        }
+        
+        // Restore lesson
+        function restoreLesson(lessonId) {
+            const lessonIndex = lessons.findIndex(l => l.id === lessonId);
+            if (lessonIndex !== -1) {
+                lessons[lessonIndex].status = 'draft';
+                lessons[lessonIndex].updatedAt = new Date().toISOString();
+                localStorage.setItem('eduNabhaLessons', JSON.stringify(lessons));
+                loadLessons();
+                showNotification('Lesson restored successfully!', 'success');
+            }
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationMessage = notification.querySelector('.notification-message');
+            const notificationIcon = notification.querySelector('.notification-icon i');
+            
+            notificationMessage.textContent = message;
+            notification.className = 'notification ' + type;
+            
+            if (type === 'success') {
+                notificationIcon.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                notificationIcon.className = 'fas fa-exclamation-circle';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Add event listeners for filters
+        document.getElementById('searchLessons').addEventListener('input', loadLessons);
+        document.getElementById('filterClass').addEventListener('change', loadLessons);
+        document.getElementById('sortBy').addEventListener('change', loadLessons);
+        
+        function logout() {
+            localStorage.removeItem('currentTeacher');
+            window.location.href = 'login.html';
+        }
+        
+        // Initialize
+        loadTeacherData();
+        loadLessons();
+    </script>
+</body>
+</html>
