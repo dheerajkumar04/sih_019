@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - EduNabha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: #667eea;
+        }
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .navbar .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        .navbar .points {
+            background: #ffd700;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .welcome {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .welcome h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .welcome p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card.blue {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+        .stat-card.green {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            color: white;
+        }
+        .stat-card.purple {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+        }
+        .stat-card.orange {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+        }
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .report-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            background-color: white;
+            cursor: pointer;
+        }
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .date-input {
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .date-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e1e5e9;
+        }
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+        .student-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .student-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .student-item:last-child {
+            border-bottom: none;
+        }
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        .student-info {
+            flex-grow: 1;
+        }
+        .student-name {
+            font-weight: 600;
+            color: #333;
+        }
+        .student-email {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .student-grade {
+            font-weight: 600;
+            color: #333;
+            margin-right: 15px;
+            min-width: 50px;
+            text-align: right;
+        }
+        .progress-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+        }
+        .progress-excellent {
+            background: #4caf50;
+        }
+        .progress-good {
+            background: #8bc34a;
+        }
+        .progress-average {
+            background: #ff9800;
+        }
+        .progress-poor {
+            background: #f44336;
+        }
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .logout-btn:hover {
+            background: #ff5252;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        .close-btn:hover {
+            color: #333;
+        }
+        .export-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .export-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .export-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .export-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .insight-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .insight-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .insight-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .insight-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .navbar .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .report-controls {
+                flex-direction: column;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>🎓</span>
+            EduNabha
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="lessons.html">Lessons</a></li>
+            <li><a href="grades.html">Grades</a></li>
+            <li><a href="reports.html" class="active">Reports</a></li>
+        </ul>
+        <div class="user-info">
+            <div class="user-avatar" id="userAvatar">T</div>
+            <span id="username">Teacher</span>
+            <div class="points" id="userPoints">⭐ 0</div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="welcome">
+            <h1>Performance Reports</h1>
+            <p>Comprehensive analytics and insights about your students' performance</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card blue" onclick="showPerformanceTrend()">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="avgPerformance">0%</div>
+                        <div class="stat-label">Average Performance</div>
+                    </div>
+                    <div class="stat-icon">📊</div>
+                </div>
+            </div>
+            <div class="stat-card green" onclick="showCompletionRate()">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="completionRate">0%</div>
+                        <div class="stat-label">Assignment Completion</div>
+                    </div>
+                    <div class="stat-icon">✅</div>
+                </div>
+            </div>
+            <div class="stat-card purple" onclick="showEngagementRate()">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="engagementRate">0%</div>
+                        <div class="stat-label">Student Engagement</div>
+                    </div>
+                    <div class="stat-icon">👥</div>
+                </div>
+            </div>
+            <div class="stat-card orange" onclick="showImprovementRate()">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="improvementRate">0%</div>
+                        <div class="stat-label">Improvement Rate</div>
+                    </div>
+                    <div class="stat-icon">📈</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>📊 Performance Analytics</h3>
+            <div class="report-controls">
+                <select class="filter-select" id="reportType">
+                    <option value="overall">Overall Performance</option>
+                    <option value="subject">Subject-wise Performance</option>
+                    <option value="individual">Individual Student</option>
+                    <option value="time">Performance Over Time</option>
+                </select>
+                <select class="filter-select" id="subjectFilter">
+                    <option value="all">All Subjects</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="english">English</option>
+                    <option value="history">History</option>
+                </select>
+                <select class="filter-select" id="studentFilter">
+                    <option value="all">All Students</option>
+                </select>
+                <input type="date" class="date-input" id="startDate" placeholder="Start Date">
+                <input type="date" class="date-input" id="endDate" placeholder="End Date">
+                <button class="btn" onclick="generateReport()">Generate Report</button>
+                <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>🎯 Key Insights</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-title">Top Performing Class</div>
+                    <div class="insight-value" id="topClass">-</div>
+                    <div class="insight-description">Highest average grade across all subjects</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title">Most Improved Student</div>
+                    <div class="insight-value" id="mostImproved">-</div>
+                    <div class="insight-description">Highest improvement in the last month</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title">Needs Attention</div>
+                    <div class="insight-value" id="needsAttention">-</div>
+                    <div class="insight-description">Students requiring additional support</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title">Best Attendance</div>
+                    <div class="insight-value" id="bestAttendance">-</div>
+                    <div class="insight-description">Highest attendance rate</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>👨‍🎓 Student Performance Ranking</h3>
+            <div class="student-list" id="studentRanking">
+                <!-- Student ranking will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>📤 Export Options</h3>
+            <p style="color: #666; margin-bottom: 1rem;">Export your reports in different formats for sharing or further analysis</p>
+            <div class="export-options">
+                <button class="export-btn" onclick="exportReport('pdf')">
+                    <i class="fas fa-file-pdf"></i>
+                    Export as PDF
+                </button>
+                <button class="export-btn" onclick="exportReport('excel')">
+                    <i class="fas fa-file-excel"></i>
+                    Export as Excel
+                </button>
+                <button class="export-btn" onclick="exportReport('csv')">
+                    <i class="fas fa-file-csv"></i>
+                    Export as CSV
+                </button>
+                <button class="export-btn" onclick="exportReport('print')">
+                    <i class="fas fa-print"></i>
+                    Print Report
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Performance Trend Modal -->
+    <div id="performanceTrendModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Performance Trend Analysis</h3>
+                <button class="close-btn" onclick="closeModal('performanceTrendModal')">&times;</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="performanceTrendChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Completion Rate Modal -->
+    <div id="completionRateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Assignment Completion Rate</h3>
+                <button class="close-btn" onclick="closeModal('completionRateModal')">&times;</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="completionRateChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Engagement Rate Modal -->
+    <div id="engagementRateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Student Engagement Analysis</h3>
+                <button class="close-btn" onclick="closeModal('engagementRateModal')">&times;</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="engagementRateChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Improvement Rate Modal -->
+    <div id="improvementRateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Student Improvement Rate</h3>
+                <button class="close-btn" onclick="closeModal('improvementRateModal')">&times;</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="improvementRateChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Check authentication
+        const currentUser = JSON.parse(localStorage.getItem('currentTeacher'));
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+        
+        // Load teacher data
+        function loadTeacherData() {
+            const teachers = JSON.parse(localStorage.getItem('eduNabhaTeachers') || '[]');
+            const teacher = teachers.find(t => t.id === currentUser.id) || currentUser;
+            
+            // Update navbar
+            document.getElementById('userAvatar').textContent = teacher.username.charAt(0).toUpperCase();
+            document.getElementById('username').textContent = teacher.username;
+            document.getElementById('userPoints').textContent = `⭐ ${teacher.totalPoints || 0}`;
+        }
+        
+        // Generate sample student data if not exists
+        function generateSampleStudentData() {
+            if (localStorage.getItem('eduNabhaStudents')) return;
+            
+            const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'Rowan', 'Emery', 'Finley', 'Kai', 'River', 'Drew', 'Skyler', 'Jamie', 'Reese', 'Arden', 'Blake'];
+            const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+            
+            const students = [];
+            
+            for (let i = 1; i <= 20; i++) {
+                const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+                const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+                const name = `${firstName} ${lastName}`;
+                const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`;
+                
+                // Generate random grades for each subject
+                const mathGrade = Math.floor(Math.random() * 41) + 60; // 60-100
+                const scienceGrade = Math.floor(Math.random() * 41) + 60; // 60-100
+                const englishGrade = Math.floor(Math.random() * 41) + 60; // 60-100
+                const historyGrade = Math.floor(Math.random() * 41) + 60; // 60-100
+                
+                // Calculate overall grade
+                const overallGrade = Math.round((mathGrade + scienceGrade + englishGrade + historyGrade) / 4);
+                
+                // Generate random attendance
+                const attendance = Math.floor(Math.random() * 21) + 80; // 80-100%
+                
+                // Generate random progress
+                const progress = Math.floor(Math.random() * 41) + 60; // 60-100%
+                
+                // Generate random assignment completion rate
+                const completionRate = Math.floor(Math.random() * 31) + 70; // 70-100%
+                
+                students.push({
+                    id: i,
+                    name,
+                    email,
+                    grades: {
+                        mathematics: mathGrade,
+                        science: scienceGrade,
+                        english: englishGrade,
+                        history: historyGrade
+                    },
+                    overallGrade,
+                    attendance,
+                    progress,
+                    completionRate,
+                    previousGrade: Math.max(50, overallGrade - Math.floor(Math.random() * 20)) // Previous grade for improvement calculation
+                });
+            }
+            
+            localStorage.setItem('eduNabhaStudents', JSON.stringify(students));
+        }
+        
+        // Load report statistics
+        function loadReportStats() {
+            const students = JSON.parse(localStorage.getItem('eduNabhaStudents') || '[]');
+            
+            // Calculate average performance
+            const avgPerformance = students.length > 0 
+                ? Math.round(students.reduce((sum, student) => sum + student.overallGrade, 0) / students.length)
+                : 0;
+            document.getElementById('avgPerformance').textContent = `${avgPerformance}%`;
+            
+            // Calculate completion rate
+            const completionRate = students.length > 0 
+                ? Math.round(students.reduce((sum, student) => sum + student.completionRate, 0) / students.length)
+                : 0;
+            document.getElementById('completionRate').textContent = `${completionRate}%`;
+            
+            // Calculate engagement rate (average of attendance and progress)
+            const engagementRate = students.length > 0 
+                ? Math.round(students.reduce((sum, student) => sum + (student.attendance + student.progress) / 2, 0) / students.length)
+                : 0;
+            document.getElementById('engagementRate').textContent = `${engagementRate}%`;
+            
+            // Calculate improvement rate
+            const improvementRate = students.length > 0 
+                ? Math.round(students.reduce((sum, student) => sum + (student.overallGrade - student.previousGrade), 0) / students.length)
+                : 0;
+            document.getElementById('improvementRate').textContent = `${improvementRate}%`;
+            
+            // Load key insights
+            loadKeyInsights(students);
+            
+            // Load student ranking
+            loadStudentRanking(students);
+            
+            // Load student filter options
+            loadStudentFilterOptions(students);
+        }
+        
+        // Load key insights
+        function loadKeyInsights(students) {
+            // Find top performing class (subject with highest average)
+            const subjects = ['mathematics', 'science', 'english', 'history'];
+            let topSubject = '';
+            let topAvg = 0;
+            
+            subjects.forEach(subject => {
+                const avg = students.reduce((sum, student) => sum + student.grades[subject], 0) / students.length;
+                if (avg > topAvg) {
+                    topAvg = avg;
+                    topSubject = subject.charAt(0).toUpperCase() + subject.slice(1);
+                }
+            });
+            
+            document.getElementById('topClass').textContent = `${topSubject} (${Math.round(topAvg)}%)`;
+            
+            // Find most improved student
+            const improvements = students.map(student => ({
+                name: student.name,
+                improvement: student.overallGrade - student.previousGrade
+            })).sort((a, b) => b.improvement - a.improvement);
+            
+            if (improvements.length > 0) {
+                document.getElementById('mostImproved').textContent = 
+                    `${improvements[0].name} (+${improvements[0].improvement}%)`;
+            }
+            
+            // Find students needing attention (below 70% overall grade)
+            const needsAttention = students.filter(student => student.overallGrade < 70).length;
+            document.getElementById('needsAttention').textContent = `${needsAttention} students`;
+            
+            // Find best attendance
+            const bestAttendance = students.reduce((best, student) => 
+                student.attendance > best.attendance ? student : best
+            );
+            document.getElementById('bestAttendance').textContent = `${bestAttendance.name} (${bestAttendance.attendance}%)`;
+        }
+        
+        // Load student ranking
+        function loadStudentRanking(students) {
+            const ranking = document.getElementById('studentRanking');
+            ranking.innerHTML = '';
+            
+            // Sort students by overall grade
+            const sortedStudents = [...students].sort((a, b) => b.overallGrade - a.overallGrade);
+            
+            sortedStudents.forEach((student, index) => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'student-item';
+                
+                // Determine progress badge class
+                let progressClass = '';
+                if (student.overallGrade >= 90) progressClass = 'progress-excellent';
+                else if (student.overallGrade >= 75) progressClass = 'progress-good';
+                else if (student.overallGrade >= 60) progressClass = 'progress-average';
+                else progressClass = 'progress-poor';
+                
+                studentItem.innerHTML = `
+                    <div class="student-avatar">${student.name.charAt(0)}</div>
+                    <div class="student-info">
+                        <div class="student-name">${student.name}</div>
+                        <div class="student-email">${student.email}</div>
+                    </div>
+                    <div class="student-grade">${student.overallGrade}%</div>
+                    <div class="progress-badge ${progressClass}">#${index + 1}</div>
+                `;
+                
+                ranking.appendChild(studentItem);
+            });
+        }
+        
+        // Load student filter options
+        function loadStudentFilterOptions(students) {
+            const studentFilter = document.getElementById('studentFilter');
+            
+            // Clear existing options except "All Students"
+            while (studentFilter.options.length > 1) {
+                studentFilter.remove(1);
+            }
+            
+            // Add student options
+            students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = student.name;
+                studentFilter.appendChild(option);
+            });
+        }
+        
+        // Generate report based on selected filters
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const subjectFilter = document.getElementById('subjectFilter').value;
+            const studentFilter = document.getElementById('studentFilter').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            const students = JSON.parse(localStorage.getItem('eduNabhaStudents') || '[]');
+            
+            // Filter students based on selections
+            let filteredStudents = students;
+            
+            if (studentFilter !== 'all') {
+                filteredStudents = students.filter(student => student.id == studentFilter);
+            }
+            
+            // Generate chart based on report type
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.performanceChartInstance) {
+                window.performanceChartInstance.destroy();
+            }
+            
+            switch (reportType) {
+                case 'overall':
+                    generateOverallPerformanceChart(ctx, filteredStudents);
+                    break;
+                case 'subject':
+                    generateSubjectPerformanceChart(ctx, filteredStudents, subjectFilter);
+                    break;
+                case 'individual':
+                    generateIndividualPerformanceChart(ctx, filteredStudents, studentFilter);
+                    break;
+                case 'time':
+                    generateTimePerformanceChart(ctx, filteredStudents, startDate, endDate);
+                    break;
+            }
+        }
+        
+        // Generate overall performance chart
+        function generateOverallPerformanceChart(ctx, students) {
+            const gradeRanges = {
+                '90-100%': 0,
+                '80-89%': 0,
+                '70-79%': 0,
+                '60-69%': 0,
+                'Below 60%': 0
+            };
+            
+            students.forEach(student => {
+                if (student.overallGrade >= 90) gradeRanges['90-100%']++;
+                else if (student.overallGrade >= 80) gradeRanges['80-89%']++;
+                else if (student.overallGrade >= 70) gradeRanges['70-79%']++;
+                else if (student.overallGrade >= 60) gradeRanges['60-69%']++;
+                else gradeRanges['Below 60%']++;
+            });
+            
+            window.performanceChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(gradeRanges),
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: Object.values(gradeRanges),
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(255, 159, 64, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Overall Performance Distribution',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            },
+                            title: {
+                                display: true,
+                                text: 'Number of Students'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Generate subject performance chart
+        function generateSubjectPerformanceChart(ctx, students, subject) {
+            if (subject === 'all') {
+                // Show average performance across all subjects
+                const subjects = ['mathematics', 'science', 'english', 'history'];
+                const subjectAvgs = {};
+                
+                subjects.forEach(subj => {
+                    subjectAvgs[subj.charAt(0).toUpperCase() + subj.slice(1)] = 
+                        Math.round(students.reduce((sum, student) => sum + student.grades[subj], 0) / students.length);
+                });
+                
+                window.performanceChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(subjectAvgs),
+                        datasets: [{
+                            label: 'Average Grade',
+                            data: Object.values(subjectAvgs),
+                            backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                            borderColor: 'rgba(102, 126, 234, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Average Performance by Subject',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'Average Grade (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                // Show performance distribution for selected subject
+                const gradeRanges = {
+                    '90-100%': 0,
+                    '80-89%': 0,
+                    '70-79%': 0,
+                    '60-69%': 0,
+                    'Below 60%': 0
+                };
+                
+                students.forEach(student => {
+                    const grade = student.grades[subject];
+                    if (grade >= 90) gradeRanges['90-100%']++;
+                    else if (grade >= 80) gradeRanges['80-89%']++;
+                    else if (grade >= 70) gradeRanges['70-79%']++;
+                    else if (grade >= 60) gradeRanges['60-69%']++;
+                    else gradeRanges['Below 60%']++;
+                });
+                
+                window.performanceChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(gradeRanges),
+                        datasets: [{
+                            label: 'Number of Students',
+                            data: Object.values(gradeRanges),
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(255, 159, 64, 0.7)',
+                                'rgba(255, 99, 132, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: `${subject.charAt(0).toUpperCase() + subject.slice(1)} Performance Distribution`,
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Number of Students'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Generate individual performance chart
+        function generateIndividualPerformanceChart(ctx, students, studentId) {
+            if (studentId === 'all') {
+                // Show top 5 students
+                const topStudents = [...students]
+                    .sort((a, b) => b.overallGrade - a.overallGrade)
+                    .slice(0, 5);
+                
+                window.performanceChartInstance = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Mathematics', 'Science', 'English', 'History'],
+                        datasets: topStudents.map((student, index) => ({
+                            label: student.name,
+                            data: [
+                                student.grades.mathematics,
+                                student.grades.science,
+                                student.grades.english,
+                                student.grades.history
+                            ],
+                            backgroundColor: `rgba(${102 + index * 30}, ${126 - index * 10}, ${234 - index * 20}, 0.2)`,
+                            borderColor: `rgba(${102 + index * 30}, ${126 - index * 10}, ${234 - index * 20}, 1)`,
+                            pointBackgroundColor: `rgba(${102 + index * 30}, ${126 - index * 10}, ${234 - index * 20}, 1)`,
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: `rgba(${102 + index * 30}, ${126 - index * 10}, ${234 - index * 20}, 1)`
+                        }))
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Top 5 Students Performance',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 50,
+                                suggestedMax: 100
+                            }
+                        }
+                    }
+                });
+            } else {
+                // Show selected student's performance
+                const student = students.find(s => s.id == studentId);
+                
+                if (student) {
+                    window.performanceChartInstance = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Mathematics', 'Science', 'English', 'History'],
+                            datasets: [{
+                                label: student.name,
+                                data: [
+                                    student.grades.mathematics,
+                                    student.grades.science,
+                                    student.grades.english,
+                                    student.grades.history
+                                ],
+                                backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                                borderColor: 'rgba(102, 126, 234, 1)',
+                                pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: 'rgba(102, 126, 234, 1)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: `${student.name}'s Performance`,
+                                    font: {
+                                        size: 16
+                                    }
+                                }
+                            },
+                            scales: {
+                                r: {
+                                    angleLines: {
+                                        display: true
+                                    },
+                                    suggestedMin: 50,
+                                    suggestedMax: 100
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Generate time performance chart
+        function generateTimePerformanceChart(ctx, students, startDate, endDate) {
+            // For this demo, we'll generate random data for the last 6 months
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            const avgPerformance = months.map(() => Math.floor(Math.random() * 21) + 75); // 75-95%
+            
+            window.performanceChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Average Performance',
+                        data: avgPerformance,
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Performance Over Time',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Average Grade (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Show performance trend modal
+        function showPerformanceTrend() {
+            const modal = document.getElementById('performanceTrendModal');
+            modal.style.display = 'flex';
+            
+            const ctx = document.getElementById('performanceTrendChart').getContext('2d');
+            
+            // Generate random data for the last 6 months
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            const avgPerformance = months.map(() => Math.floor(Math.random() * 21) + 75); // 75-95%
+            
+            // Destroy existing chart if it exists
+            if (window.performanceTrendChartInstance) {
+                window.performanceTrendChartInstance.destroy();
+            }
+            
+            window.performanceTrendChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Average Performance',
+                        data: avgPerformance,
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Performance Trend Analysis',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Average Grade (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Show completion rate modal
+        function showCompletionRate() {
+            const modal = document.getElementById('completionRateModal');
+            modal.style.display = 'flex';
+            
+            const students = JSON.parse(localStorage.getItem('eduNabhaStudents') || '[]');
+            
+            // Create completion rate distribution
+            const completionRanges = {
+                '90-100%': 0,
+                '80-89%': 0,
+                '70-79%': 0,
+                'Below 70%': 0
+            };
+            
+            students.forEach(student => {
+                if (student.completionRate >= 90) completionRanges['90-100%']++;
+                else if (student.completionRate >= 80) completionRanges['80-89%']++;
+                else if (student.completionRate >= 70) completionRanges['70-79%']++;
+                else completionRanges['Below 70%']++;
+            });
+            
+            const ctx = document.getElementById('completionRateChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.completionRateChartInstance) {
+                window.completionRateChartInstance.destroy();
+            }
+            
+            window.completionRateChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(completionRanges),
+                    datasets: [{
+                        data: Object.values(completionRanges),
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Assignment Completion Rate',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Show engagement rate modal
+        function showEngagementRate() {
+            const modal = document.getElementById('engagementRateModal');
+            modal.style.display = 'flex';
+            
+            const students = JSON.parse(localStorage.getItem('eduNabhaStudents') || '[]');
+            
+            // Create engagement rate distribution
+            const engagementRanges = {
+                '90-100%': 0,
+                '80-89%': 0,
+                '70-79%': 0,
+                'Below 70%': 0
+            };
+            
+            students.forEach(student => {
+                const engagement = (student.attendance + student.progress) / 2;
+                if (engagement >= 90) engagementRanges['90-100%']++;
+                else if (engagement >= 80) engagementRanges['80-89%']++;
+                else if (engagement >= 70) engagementRanges['70-79%']++;
+                else engagementRanges['Below 70%']++;
+            });
+            
+            const ctx = document.getElementById('engagementRateChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.engagementRateChartInstance) {
+                window.engagementRateChartInstance.destroy();
+            }
+            
+            window.engagementRateChartInstance = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(engagementRanges),
+                    datasets: [{
+                        data: Object.values(engagementRanges),
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Student Engagement Rate',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Show improvement rate modal
+        function showImprovementRate() {
+            const modal = document.getElementById('improvementRateModal');
+            modal.style.display = 'flex';
+            
+            const students = JSON.parse(localStorage.getItem('eduNabhaStudents') || '[]');
+            
+            // Create improvement rate distribution
+            const improvementRanges = {
+                '15%+': 0,
+                '10-14%': 0,
+                '5-9%': 0,
+                '0-4%': 0,
+                'Negative': 0
+            };
+            
+            students.forEach(student => {
+                const improvement = student.overallGrade - student.previousGrade;
+                if (improvement >= 15) improvementRanges['15%+']++;
+                else if (improvement >= 10) improvementRanges['10-14%']++;
+                else if (improvement >= 5) improvementRanges['5-9%']++;
+                else if (improvement >= 0) improvementRanges['0-4%']++;
+                else improvementRanges['Negative']++;
+            });
+            
+            const ctx = document.getElementById('improvementRateChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.improvementRateChartInstance) {
+                window.improvementRateChartInstance.destroy();
+            }
+            
+            window.improvementRateChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(improvementRanges),
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: Object.values(improvementRanges),
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(255, 159, 64, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Student Improvement Rate',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            },
+                            title: {
+                                display: true,
+                                text: 'Number of Students'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('reportType').value = 'overall';
+            document.getElementById('subjectFilter').value = 'all';
+            document.getElementById('studentFilter').value = 'all';
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            
+            generateReport();
+        }
+        
+        // Export report
+        function exportReport(format) {
+            alert(`Exporting report as ${format.toUpperCase()}...\n\nThis feature would generate and download a ${format.toUpperCase()} file with the current report data.`);
+        }
+        
+        function logout() {
+            localStorage.removeItem('currentTeacher');
+            window.location.href = 'login.html';
+        }
+        
+        // Initialize
+        generateSampleStudentData();
+        loadTeacherData();
+        loadReportStats();
+        
+        // Generate default report
+        generateReport();
+    </script>
+</body>
+</html>
