@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - EduNabha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: #667eea;
+        }
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+        .navbar .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .navbar .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .navbar .username-container {
+            position: relative;
+        }
+        .navbar .username {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+        .navbar .username::after {
+            content: "▼";
+            font-size: 10px;
+        }
+        .navbar .points {
+            background: #ffd700;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 280px;
+            padding: 1.5rem;
+            z-index: 1000;
+            display: none;
+            margin-top: 10px;
+        }
+        .profile-dropdown.active {
+            display: block;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .profile-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .profile-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .profile-upload input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .profile-upload-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .profile-details {
+            margin-bottom: 1.5rem;
+        }
+        .profile-details .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        .profile-details .detail-label {
+            color: #666;
+        }
+        .profile-details .detail-value {
+            font-weight: 500;
+            color: #333;
+        }
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .profile-actions button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .profile-actions .edit-profile {
+            background: #f0f2f5;
+            color: #333;
+        }
+        .profile-actions .edit-profile:hover {
+            background: #e1e5e9;
+        }
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .logout-btn:hover {
+            background: #ff5252;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .welcome {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .welcome h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .welcome p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hero-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .hero-text p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        .hero-btn {
+            background: white;
+            color: #667eea;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .hero-btn:hover {
+            transform: translateY(-2px);
+        }
+        .hero-image {
+            width: 200px;
+            height: 120px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card.blue {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+        .stat-card.green {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            color: white;
+        }
+        .stat-card.purple {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+        }
+        .stat-card.orange {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+        }
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .action-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateX(5px);
+        }
+        .progress-section {
+            margin-top: 1rem;
+        }
+        .progress-bar {
+            background: #e1e5e9;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .streak-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .class-list {
+            margin-top: 1rem;
+        }
+        .class-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .class-item:last-child {
+            border-bottom: none;
+        }
+        .class-name {
+            font-weight: 600;
+        }
+        .class-students {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .upcoming-deadlines {
+            margin-top: 1rem;
+        }
+        .deadline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .deadline-item:last-child {
+            border-bottom: none;
+        }
+        .deadline-title {
+            font-weight: 600;
+        }
+        .deadline-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .notification-badge {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .navbar .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .hero-image {
+                width: 150px;
+                height: 90px;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .welcome h1 {
+                font-size: 2rem;
+            }
+            .profile-dropdown {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>🎓</span>
+            EduNabha
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="lessons.html">Lessons</a></li>
+            <li><a href="grades.html">Grades</a></li>
+            <li><a href="reports.html">Reports</a></li>
+        </ul>
+        <div class="user-info">
+            <div class="user-avatar" id="userAvatar">
+                <img id="avatarImg" src="" alt="Profile" style="display: none;">
+                <span id="avatarText">T</span>
+            </div>
+            <div class="username-container">
+                <div class="username" id="username">Teacher</div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profileAvatar">
+                            <img id="profileAvatarImg" src="" alt="Profile" style="display: none;">
+                            <span id="profileAvatarText">T</span>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profileName">Teacher Name</h3>
+                            <p id="profileEmail">teacher@example.com</p>
+                        </div>
+                    </div>
+                    <div class="profile-upload">
+                        <input type="file" id="profilePicUpload" accept="image/*">
+                        <button class="profile-upload-btn">Change Photo</button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Teacher ID:</span>
+                            <span class="detail-value" id="profileId">TCH001</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Department:</span>
+                            <span class="detail-value" id="profileDept">Education</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Joined:</span>
+                            <span class="detail-value" id="profileJoinDate">Jan 2023</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Classes:</span>
+                            <span class="detail-value" id="profileClasses">3</span>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="edit-profile">Edit Profile</button>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="points" id="userPoints">⭐ 0</div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="welcome">
+            <h1 id="welcomeText">Welcome back, Teacher! 📚</h1>
+            <p>Ready to inspire and educate today?</p>
+        </div>
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Empower Your Students</h2>
+                    <p>Create engaging lessons and track student progress</p>
+                    <button class="hero-btn" onclick="window.location.href='lessons.html'">Manage Lessons</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHw1fHx0ZWFjaGluZ3xlbnwwfHx8fDE3NTc3MzkxMzh8MA&ixlib=rb-4.1.0&q=85" alt="Teaching" class="hero-image">
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="totalStudents">0</div>
+                        <div class="stat-label">Total Students</div>
+                    </div>
+                    <div class="stat-icon">👨‍🎓</div>
+                </div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="activeClasses">0</div>
+                        <div class="stat-label">Active Classes</div>
+                    </div>
+                    <div class="stat-icon">📚</div>
+                </div>
+            </div>
+            <div class="stat-card purple">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="averageGrade">0%</div>
+                        <div class="stat-label">Average Grade</div>
+                    </div>
+                    <div class="stat-icon">📊</div>
+                </div>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="pendingAssignments">0</div>
+                        <div class="stat-label">Pending Assignments</div>
+                    </div>
+                    <div class="stat-icon">📝</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-grid">
+            <div class="card">
+                <h3>🎯 Quick Actions</h3>
+                <div class="quick-actions">
+                    <a href="students.html" class="action-btn">
+                        <span>👨‍🎓</span>
+                        Manage Students
+                    </a>
+                    <a href="lessons.html" class="action-btn">
+                        <span>📖</span>
+                        Create Lesson
+                    </a>
+                    <a href="grades.html" class="action-btn">
+                        <span>📊</span>
+                        Grade Assignments
+                    </a>
+                    <a href="reports.html" class="action-btn">
+                        <span>📈</span>
+                        Generate Report
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>📈 Class Overview</h3>
+                <div class="progress-section">
+                    <div class="progress-text">
+                        <span>Course Completion</span>
+                        <span id="courseCompletion">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="courseProgressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Student Engagement</span>
+                        <span id="studentEngagement">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="engagementProgressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="class-list">
+                    <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Your Classes</h4>
+                    <div class="class-item">
+                        <div>
+                            <div class="class-name">Mathematics 101</div>
+                            <div class="class-students">24 students</div>
+                        </div>
+                        <div>82% avg.</div>
+                    </div>
+                    <div class="class-item">
+                        <div>
+                            <div class="class-name">Science Fundamentals</div>
+                            <div class="class-students">18 students</div>
+                        </div>
+                        <div>78% avg.</div>
+                    </div>
+                    <div class="class-item">
+                        <div>
+                            <div class="class-name">Literature & Writing</div>
+                            <div class="class-students">22 students</div>
+                        </div>
+                        <div>85% avg.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 2rem;">
+            <h3>⏰ Upcoming Deadlines <span class="notification-badge">3</span></h3>
+            <div class="upcoming-deadlines">
+                <div class="deadline-item">
+                    <div>
+                        <div class="deadline-title">Math Assignment #3</div>
+                        <div class="deadline-date">Due in 2 days</div>
+                    </div>
+                    <div>24 submissions</div>
+                </div>
+                <div class="deadline-item">
+                    <div>
+                        <div class="deadline-title">Science Quiz</div>
+                        <div class="deadline-date">Due in 3 days</div>
+                    </div>
+                    <div>18 submissions</div>
+                </div>
+                <div class="deadline-item">
+                    <div>
+                        <div class="deadline-title">Literature Essay</div>
+                        <div class="deadline-date">Due in 5 days</div>
+                    </div>
+                    <div>22 submissions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        const currentUser = JSON.parse(localStorage.getItem('currentTeacher'));
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+        
+        // Toggle profile dropdown
+        document.getElementById('username').addEventListener('click', function() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('profileDropdown');
+            const username = document.getElementById('username');
+            
+            if (!dropdown.contains(event.target) && event.target !== username) {
+                dropdown.classList.remove('active');
+            }
+        });
+        
+        // Profile picture upload
+        document.getElementById('profilePicUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    
+                    // Update profile pictures
+                    document.getElementById('avatarImg').src = imageUrl;
+                    document.getElementById('avatarImg').style.display = 'block';
+                    document.getElementById('avatarText').style.display = 'none';
+                    
+                    document.getElementById('profileAvatarImg').src = imageUrl;
+                    document.getElementById('profileAvatarImg').style.display = 'block';
+                    document.getElementById('profileAvatarText').style.display = 'none';
+                    
+                    // Save to localStorage
+                    const teachers = JSON.parse(localStorage.getItem('eduNabhaTeachers') || '[]');
+                    const teacherIndex = teachers.findIndex(t => t.id === currentUser.id);
+                    
+                    if (teacherIndex !== -1) {
+                        teachers[teacherIndex].profilePicture = imageUrl;
+                        localStorage.setItem('eduNabhaTeachers', JSON.stringify(teachers));
+                    }
+                    
+                    // Also update current user in localStorage
+                    currentUser.profilePicture = imageUrl;
+                    localStorage.setItem('currentTeacher', JSON.stringify(currentUser));
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Load teacher data
+        function loadTeacherData() {
+            const teachers = JSON.parse(localStorage.getItem('eduNabhaTeachers') || '[]');
+            const teacher = teachers.find(t => t.id === currentUser.id) || currentUser;
+            
+            // Update navbar
+            document.getElementById('username').textContent = teacher.username;
+            document.getElementById('userPoints').textContent = `⭐ ${teacher.totalPoints || 0}`;
+            
+            // Update profile dropdown
+            document.getElementById('profileName').textContent = teacher.username;
+            document.getElementById('profileEmail').textContent = teacher.email || 'teacher@example.com';
+            document.getElementById('profileId').textContent = teacher.teacherId || 'TCH001';
+            document.getElementById('profileDept').textContent = teacher.department || 'Education';
+            document.getElementById('profileJoinDate').textContent = teacher.joinDate || 'Jan 2023';
+            document.getElementById('profileClasses').textContent = teacher.activeClasses || '3';
+            
+            // Update welcome text
+            document.getElementById('welcomeText').textContent = `Welcome back, ${teacher.username}! 📚`;
+            
+            // Update stats
+            document.getElementById('totalStudents').textContent = teacher.totalStudents || 0;
+            document.getElementById('activeClasses').textContent = teacher.activeClasses || 0;
+            
+            // Calculate average grade
+            const studentGrades = teacher.studentGrades || [];
+            const avgGrade = studentGrades.length > 0 
+                ? Math.round(studentGrades.reduce((a, b) => a + b, 0) / studentGrades.length)
+                : 0;
+            document.getElementById('averageGrade').textContent = `${avgGrade}%`;
+            
+            document.getElementById('pendingAssignments').textContent = teacher.pendingAssignments || 0;
+            
+            // Update progress bars
+            const courseCompletion = teacher.courseCompletion || 0;
+            document.getElementById('courseCompletion').textContent = `${courseCompletion}%`;
+            document.getElementById('courseProgressBar').style.width = `${courseCompletion}%`;
+            
+            const studentEngagement = teacher.studentEngagement || 0;
+            document.getElementById('studentEngagement').textContent = `${studentEngagement}%`;
+            document.getElementById('engagementProgressBar').style.width = `${studentEngagement}%`;
+            
+            // Load profile picture if exists
+            if (teacher.profilePicture) {
+                document.getElementById('avatarImg').src = teacher.profilePicture;
+                document.getElementById('avatarImg').style.display = 'block';
+                document.getElementById('avatarText').style.display = 'none';
+                
+                document.getElementById('profileAvatarImg').src = teacher.profilePicture;
+                document.getElementById('profileAvatarImg').style.display = 'block';
+                document.getElementById('profileAvatarText').style.display = 'none';
+            } else {
+                
+                const initial = teacher.username.charAt(0).toUpperCase();
+                document.getElementById('avatarText').textContent = initial;
+                document.getElementById('profileAvatarText').textContent = initial;
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('currentTeacher');
+            window.location.href = 'login.html';
+        }
+        
+        
+        loadTeacherData();
+        
+      
+        setInterval(loadTeacherData, 60000);
+    </script>
+</body>
+</html>
