@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Learning Quiz</title>
+    <link rel="stylesheet" href="../static/style_quiz_page.css">
+</head>
+<body>
+    <div class="container quiz-wrapper">
+        <header>
+            <h1>Digital Learning Quiz</h1>
+            <div class="timer">⏱ Time Left: <span id="timer">30</span>s</div>
+        </header>
+
+        <main>
+            <aside class="sidebar">
+                <h3>Choose a Question</h3>
+                <div id="nav-bar" class="question-nav-grid"></div>
+            </aside>
+
+            <section class="quiz-content">
+                <div class="question" id="question-box">Loading question...</div>
+                <div class="options" id="options"></div>
+                <div id="feedback" class="feedback"></div>
+
+                <div class="controls">
+                    <button id="next-btn" onclick="goToNext()">Next</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Final Score Modal -->
+    <div id="final-score-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>🎉 Quiz Completed!</h2>
+        <p>Your Score: <strong id="final-score-text"></strong></p>
+        <button id="retry-btn">Retry Quiz</button>
+    </div>
+    </div>
+
+    <script src="../static/script_quiz_page.js"></script>
+</body>
+</html>

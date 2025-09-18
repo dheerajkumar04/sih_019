@@ -1,0 +1,318 @@
+/* ===== Lessons Banner ===== */
+.banner {
+  background: linear-gradient(to right, #2d5bff, #6a5af9);
+  color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.banner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.banner-content .left {
+  max-width: 70%;
+}
+
+.banner-content h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.banner-content p {
+  margin: 6px 0;
+}
+
+/* Lesson Stats */
+/* Layout of all cards */
+.stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-family: sans-serif;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 220px;
+    flex: 1;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h4 {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+.card p {
+    margin: 5px 0 0;
+}
+
+.card p strong {
+    font-size: 20px;
+}
+
+/* Icon Circle */
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === Specific Card Colors === */
+
+/* Total Lessons */
+.total p strong {
+    color: #2563eb;
+}
+
+.total .icon-circle {
+    background-color: #e0edff;
+}
+
+.total svg {
+    stroke: #2563eb;
+}
+
+/* Completed */
+.completed p strong {
+    color: #16a34a;
+}
+
+.completed .icon-circle {
+    background-color: #d1f9dd;
+}
+
+.completed svg {
+    stroke: #16a34a;
+}
+
+/* In Progress */
+.in-progress p strong {
+    color: #ea580c;
+}
+
+.in-progress .icon-circle {
+    background-color: #ffe9d9;
+}
+
+.in-progress svg {
+    stroke: #ea580c;
+}
+
+/* Bookmarked */
+.bookmarked p strong {
+    color: #9333ea;
+}
+
+.bookmarked .icon-circle {
+    background-color: #f3e8ff;
+}
+
+.bookmarked svg {
+    stroke: #9333ea;
+}
+
+/* Optional: SVG size */
+.icon-circle svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Filters */
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  gap: 20px; /* add some gap between left and right */
+}
+
+/* Left buttons style - keep as is */
+.filter-left button {
+  margin-right: 10px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.filter-left button.active,
+.filter-left button:hover {
+  background-color: #2d5bff;
+  color: #fff;
+}
+
+/* Make label block and add spacing */
+.filter-right label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 12px; /* smaller, balanced space */
+  color: #333;
+}
+
+.filter-right select {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid gray;
+  background: transparent;
+  box-sizing: border-box; /* ensure padding doesn't break width */
+}
+
+/* Optional: responsive tweak */
+
+
+/* Lessons Grid */
+.lessons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.lesson-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 16px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.lesson-card:hover {
+  transform: translateY(-4px);
+}
+
+.lesson-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.lesson-card h4 {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.lesson-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 6px 0 12px;
+}
+
+.lesson-card .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.lesson-card button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.lesson-card .start {
+  background: linear-gradient(to right, #2d5bff, #6a5af9);
+  color: #fff;
+}
+
+.lesson-card .review {
+  background: linear-gradient(to right, #6a5af9, #2d5bff);
+  color: #fff;
+}
+
+/* Learning Journey Section */
+.learning-journey {
+  background: linear-gradient(to right, #f5fff8, #f0f8ff);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.learning-journey h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.recommendation {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.next-lesson,
+.streak {
+  flex: 1;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.next-lesson h4,
+.streak h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.next-lesson p,
+.streak p {
+  font-size: 14px;
+  color: #555;
+}
+
+
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background-color: #e0e0e0; /* light gray background */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.progress {
+  height: 100%;
+  width: 50%; /* you can control this dynamically */
+  background: #3bf644; /* vibrant orange-pink gradient */
+  border-radius: 12px 0 0 12px;
+  transition: width 0.5s ease;
+}

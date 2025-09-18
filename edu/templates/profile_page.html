@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduElevate - Profile Portfolio</title>
+    <link rel="stylesheet" href="../static/style_profile_page.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1>EduElevate</h1>
+                    <span class="subtitle">Profile Dashboard</span>
+                </div>
+                <button class="edit-btn" id="editBtn">
+                    <i class="fas fa-edit"></i>
+                    <span id="editText">Edit Profile</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="profile-layout">
+                <!-- Profile Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="profile-card">
+                        <!-- Profile Header -->
+                        <div class="profile-header">
+                            <div class="profile-image-container">
+                                <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&crop=face" 
+                                     alt="Profile" class="profile-image" id="profileImage">
+                                <div class="profile-badge">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <h2 class="profile-name" id="profileName">Dheeraj</h2>
+                            <span class="profile-role" id="profileRole">student</span>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="quick-stats">
+                            <h3>Quick Stats</h3>
+                            <div class="stat-item">
+                                <span class="stat-label">Progress</span>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progressFill"></div>
+                                    </div>
+                                    <span class="progress-text" id="progressText">50%</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average Score</span>
+                                <span class="stat-value score" id="averageScore">89%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Study Streak</span>
+                                <div class="streak-container">
+                                    <span class="stat-value streak" id="studyStreak">15</span>
+                                    <span class="streak-unit">days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <section class="main-section">
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card blue">
+                            <div class="stat-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="completedLessons">24/48</div>
+                                <div class="stat-title">Completed Lessons</div>
+                            </div>
+                        </div>
+                        <div class="stat-card green">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="avgScore">89%</div>
+                                <div class="stat-title">Average Score</div>
+                            </div>
+                        </div>
+                        <div class="stat-card orange">
+                            <div class="stat-icon">
+                                <i class="fas fa-target"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="streakDays">15 days</div>
+                                <div class="stat-title">Study Streak</div>
+                            </div>
+                        </div>
+                        <div class="stat-card purple">
+                            <div class="stat-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="badges">8/12</div>
+                                <div class="stat-title">Badges</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Navigation -->
+                    <nav class="tab-navigation">
+                        <button class="tab-btn active" data-tab="personal">
+                            <i class="fas fa-user"></i>
+                            Personal Info
+                        </button>
+                        <button class="tab-btn" data-tab="academic">
+                            <i class="fas fa-graduation-cap"></i>
+                            Academic Info
+                        </button>
+                        <button class="tab-btn" data-tab="preferences">
+                            <i class="fas fa-cog"></i>
+                            Preferences
+                        </button>
+                        <button class="tab-btn" data-tab="achievements">
+                            <i class="fas fa-trophy"></i>
+                            Achievements
+                        </button>
+                    </nav>
+
+                    <!-- Tab Content -->
+                    <div class="content-layout">
+                        <div class="tab-content-area">
+                            <!-- Personal Information Tab -->
+                            <div class="tab-content active" id="personal">
+                                <div class="content-card">
+                                    <h3>Personal Information</h3>
+                                    <div class="info-grid">
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-envelope"></i>
+                                                Email:
+                                            </div>
+                                            <div class="info-value" id="email">dheeraj@example.com</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-phone"></i>
+                                                Phone:
+                                            </div>
+                                            <div class="info-value" id="phone">9876543210</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-calendar"></i>
+                                                Date of Birth:
+                                            </div>
+                                            <div class="info-value" id="dob">2005-04-23</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-venus-mars"></i>
+                                                Gender:
+                                            </div>
+                                            <div class="info-value" id="gender">Male</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Address:
+                                            </div>
+                                            <div class="info-value" id="address">Springfield, USA</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-phone-alt"></i>
+                                                Emergency Contact:
+                                            </div>
+                                            <div class="info-value" id="emergencyContact">+91 9876543211</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-tint"></i>
+                                                Blood Group:
+                                            </div>
+                                            <div class="info-value" id="bloodGroup">B+</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-calendar-plus"></i>
+                                                Joined On:
+                                            </div>
+                                            <div class="info-value" id="joinedDate">2025-09-08</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Academic Information Tab -->
+                            <div class="tab-content" id="academic">
+                                <div class="content-card">
+                                    <h3>Academic Information</h3>
+                                    <div class="info-grid">
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-graduation-cap"></i>
+                                                Class:
+                                            </div>
+                                            <div class="info-value" id="class">10th</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-school"></i>
+                                                School:
+                                            </div>
+                                            <div class="info-value" id="school">Springfield Public School</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-certificate"></i>
+                                                Board:
+                                            </div>
+                                            <div class="info-value" id="board">CBSE</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                Academic Year:
+                                            </div>
+                                            <div class="info-value" id="academicYear">2024-2025</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-chart-bar"></i>
+                                                Current GPA:
+                                            </div>
+                                            <div class="info-value" id="gpa">8.9</div>
+                                        </div>
+                                        <div class="info-row subjects-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-book"></i>
+                                                Subjects:
+                                            </div>
+                                            <div class="subjects-container" id="subjects">
+                                                <span class="subject-tag">Math</span>
+                                                <span class="subject-tag">Science</span>
+                                                <span class="subject-tag">English</span>
+                                                <span class="subject-tag">History</span>
+                                                <span class="subject-tag">Geography</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preferences Tab -->
+                            <div class="tab-content" id="preferences">
+                                <div class="content-card">
+                                    <h3>Preferences</h3>
+                                    <div class="info-grid">
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-globe"></i>
+                                                Language:
+                                            </div>
+                                            <div class="info-value" id="language">English</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-palette"></i>
+                                                Theme:
+                                            </div>
+                                            <div class="info-value" id="theme">Light</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-bell"></i>
+                                                Notifications:
+                                            </div>
+                                            <div class="info-value" id="notifications">Enabled</div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">
+                                                <i class="fas fa-envelope-open"></i>
+                                                Email Updates:
+                                            </div>
+                                            <div class="info-value" id="emailUpdates">Disabled</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Achievements Tab -->
+                            <div class="tab-content" id="achievements">
+                                <div class="content-card">
+                                    <h3>Achievements & Badges</h3>
+                                    <div class="achievements-grid" id="achievementsGrid">
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="achievement-text">Mathematics Excellence</span>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="achievement-text">Perfect Attendance</span>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="achievement-text">Science Quiz Champion</span>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="achievement-text">Early Bird Learner</span>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="achievement-text">Consistent Performer</span>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="achievement-text">Peer Helper</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity Sidebar -->
+                        <aside class="activity-sidebar">
+                            <div class="activity-card">
+                                <h3>
+                                    <i class="fas fa-clock"></i>
+                                    Recent Activity
+                                </h3>
+                                <div class="activity-list" id="activityList">
+                                    <div class="activity-item">
+                                        <div class="activity-icon lesson">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">Completed Mathematics Lesson</p>
+                                            <span class="activity-time">2 hours ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon quiz">
+                                            <i class="fas fa-question-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">Scored 95% in Science Quiz</p>
+                                            <span class="activity-time">1 day ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon assignment">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">Submitted History Assignment</p>
+                                            <span class="activity-time">2 days ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon lesson">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">Started English Literature Course</p>
+                                            <span class="activity-time">3 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="../static/script_profile_page.js"></script>
+</body>
+</html>

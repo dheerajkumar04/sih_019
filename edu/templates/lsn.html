@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forest Learning Path</title>
+  <link rel="stylesheet" href="../static/style_lsn.css" />
+</head>
+<body>
+
+    <div class="forest-background">
+    <div class="checkpoint-star" id="cp1" onclick="goToCheckpoint(this.id)"></div>
+    <div class="checkpoint-star" id="cp2" onclick="goToCheckpoint(this.id)"></div>
+    <div class="checkpoint-star" id="cp3" onclick="goToCheckpoint(this.id)"></div>
+    <div class="checkpoint-star" id="cp4" onclick="goToCheckpoint(this.id)"></div>
+    <div class="checkpoint-star" id="cp5" onclick="goToCheckpoint(this.id)"></div> 
+    <div class="checkpoint-star" id="cp6" onclick="goToCheckpoint(this.id)"></div>
+
+    <div class="lesson-banner">
+        🌲 <strong>Lesson 1:</strong> Basics of Computers, Modern Technology
+    </div>
+    </div>
+
+    <script>
+    function goToCheckpoint(checkpointId) {
+        // Redirect to /checkpoint with query parameter cp=checkpointId
+        window.location.href = `/checkpoint?cp=${checkpointId}`;
+    }
+    </script>
+
+
+</body>
+</html>

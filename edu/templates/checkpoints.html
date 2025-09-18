@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lesson 1: What is a Computer?</title>
+  <link rel="stylesheet" href="../static/style_checkpoints.css" />
+</head>
+<body>
+
+  <!-- Lesson heading -->
+  <div id="cp-heading"></div>
+
+  <div class="main_container_">
+    <!-- Cards container with yellow border -->
+    <div class="cards-container" id="cards-container">
+    </div>
+    <div class="chatbot" id="chatbot">
+      <div class="chat-messages" id="chat-messages" style="flex: 1; overflow-y: auto; margin-bottom: 10px;">
+        <!-- Chat messages will go here -->
+      </div>
+
+      <form id="chat-form" style="display: flex; gap: 10px; align-items: flex-end;">
+        <textarea
+          id="chat-input"
+          placeholder="Type your question..."
+          rows="1"
+          autocomplete="off"
+          required
+          style="
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background-color: #1e2a32;
+            color: white;
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+            resize: none;
+            overflow-y: hidden;
+            max-height: 96px; /* approx 4 lines */
+            transition: box-shadow 0.3s ease;
+            line-height: 24px; /* control height of each line */
+          "
+        ></textarea>
+        <button
+          type="submit"
+          style="
+            padding: 12px 20px;
+            background-color: #0095ff;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #181a1c;
+            transition: background-color 0.3s ease;
+          "
+          onmouseover="this.style.backgroundColor='#00ffff';"
+          onmouseout="this.style.backgroundColor='#0095ff';"
+        >
+          Send
+        </button>
+      </form>
+
+    </div>
+  </div>
+  <!-- Navigation buttons -->
+  <div class="nav-buttons">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button>
+  </div>
+  <div id="checkpoint-data" data-cp="{{ cp }}"></div>
+  <div id="lang" data-lang="{{ lang }}"></div>
+</body>
+  <script src="../static/script_checkpoints.js"></script>
+</html>

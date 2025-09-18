@@ -1,0 +1,206 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #f7f9fc;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Main container */
+.bookmarks {
+  width: 95%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* Welcome Section */
+.b_welcome {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.b_file_question {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.b_headings h1 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.b_headings p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* Status Cards */
+.b_status {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+.b_p_cards {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+}
+
+.b_p_cards:hover {
+  transform: translateY(-5px);
+}
+
+.b_p_cards_head p:first-child {
+  font-size: 14px;
+  color: #555;
+}
+
+.b_p_cards_head p:last-child {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.circle {
+  background: rgb(8, 240, 8);
+  padding: 12px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Filters */
+.b_filters {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.b_filters h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.b_filters button {
+  background: #f3f6fb;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.b_filters button:hover {
+  background: #e0e7ff;
+}
+
+.b_filters button:first-of-type {
+  background: #6a11cb;
+  color: #fff;
+}
+
+/* Bookmarks List */
+.all_book h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.b_card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  transition: 0.3s;
+}
+
+.b_card:hover {
+  transform: translateY(-3px);
+}
+
+.b_card h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.b_card span {
+  font-size: 14px;
+  color: #666;
+  margin-left: 5px;
+}
+
+.b_card p {
+  font-size: 14px;
+  color: #555;
+  grid-column: 2 / 3;
+}
+
+/* Quick Tips Section */
+.quick_tip {
+  margin-top: 25px;
+  background: #f0f6ff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.quick_tip h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.quick_left, .quick_right {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.quick_left .circle, .quick_right .circle {
+  background: #fff;
+  padding: 12px;
+  border-radius: 50%;
+  margin-right: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.quick_tip h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.quick_tip p {
+  font-size: 14px;
+  color: #555;
+}

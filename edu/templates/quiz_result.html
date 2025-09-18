@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ result.quiz_title }} - Result</title>
+    <link rel="stylesheet" href="../static/style_quiz_result.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📘 {{ result.quiz_title }} - Results</h1>
+        <div class="summary">
+            <p><strong>Username:</strong> {{ result.username }}</p>
+            <p><strong>Score:</strong> {{ result.score }}</p>
+            <p><strong>Total Questions:</strong> {{ result.total_questions }}</p>
+            <p><strong>Time Allocated:</strong> {{ result.time_allocated }}</p>
+            <p><strong>Time Taken:</strong> {{ result.time_taken }}</p>
+            <p><strong>Attempted On:</strong> {{ result.attempted_on }}</p>
+        </div>
+
+        <div class="questions">
+            {% for ans in result.answers %}
+                <div class="question-card {{ 'correct' if ans.chosen_answer == ans.correct_option else 'wrong' }}">
+                    <h2>Q{{ loop.index }}: {{ ans.question }}</h2>
+                    <ul>
+                        <li class="{{ 'selected' if ans.chosen_answer == 1 else '' }} {{ 'correct-answer' if ans.correct_option == 1 else '' }}">1. {{ ans.option1 }}</li>
+                        <li class="{{ 'selected' if ans.chosen_answer == 2 else '' }} {{ 'correct-answer' if ans.correct_option == 2 else '' }}">2. {{ ans.option2 }}</li>
+                        <li class="{{ 'selected' if ans.chosen_answer == 3 else '' }} {{ 'correct-answer' if ans.correct_option == 3 else '' }}">3. {{ ans.option3 }}</li>
+                        <li class="{{ 'selected' if ans.chosen_answer == 4 else '' }} {{ 'correct-answer' if ans.correct_option == 4 else '' }}">4. {{ ans.option4 }}</li>
+                    </ul>
+                    <p class="explanation">💡 <strong>Reason:</strong> {{ ans.reason }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

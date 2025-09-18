@@ -1,0 +1,848 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/style_main.css">
+    <link rel="stylesheet" href="../static/style_dashboard.css">
+    <link rel="stylesheet" href="../static/style_lessons.css">
+    <link rel="stylesheet" href="../static/style_quizzes.css">
+    <link rel="stylesheet" href="../static/style_bookmarks.css">
+    <link rel="stylesheet" href="../static/style_achievements.css">
+</head>
+<body>
+    <div id="language" data-lang="{{ lang }}"></div>
+    <div class="static_left" id="static_left">
+        <div class="about">
+            <div class="about_circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+            </div>
+            <div class="page_deatils">
+                <h2>EduElevate</h2>
+                <p>Nabha Learning Hub</p>
+            </div>
+        </div>
+        <div class="options">
+            <!-- Dashboard -->
+            <button data-target="dashboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <pre>  Dashboard</pre>
+            </button>
+
+            <!-- Lessons -->
+            <button data-target="lessons">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+                <pre>  Lessons</pre>
+            </button>
+
+            <!-- Quizzes -->
+            <button data-target="quizzes">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                <pre>  Quizzes</pre>
+            </button>
+
+            <!-- Achievements -->
+            <button data-target="achievements">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy-icon lucide-trophy"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"/><path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978"/><path d="M18 9h1.5a1 1 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6 9H4.5a1 1 0 0 1 0-5H6"/></svg>
+                <pre>  Achievements</pre>
+            </button>
+
+            <!-- Bookmarks -->
+            <button data-target="bookmarks">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                <pre>  Bookmarks</pre>
+            </button>
+        </div>
+
+
+        <div class="profile" id="profile">
+            <img src="../static/profile_pic.jpeg" alt="loading">
+            <h5>Dheeraj</h5>
+            <p>student</p>
+        </div>
+        <div class="signout" id="signOutBtn">
+            <pre>      </pre>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+            <button onclick="window.location.href='/logout'">    Sign Out</button>
+        </div>
+
+        
+    </div>
+    <div class="dynamic_right" id="dynamic_right">
+        <div class="dashboard" id="dashboard">
+            <!-- Welcome Banner -->
+            <section class="welcome-banner">
+                <div class="welcome-text">
+                    <h1>Welcome back, Dheeraj!</h1>
+                    <p>Ready to continue your learning journey?</p>
+                </div>
+                <div class="profile-pic" id="profile1">
+                    <img src="../static/profile_pic.jpeg" alt="User Profile" />
+                </div>
+            </section>
+
+            <!-- Stats Overview -->
+            <section class="stats">
+                <div class="stat-card" id="s1">
+                    <div>
+                    <h3>Completed Lessons</h3>
+                    
+                    
+                    <p><strong>2/4</strong></p>
+                    
+                    <div class="progress-bar"></div>
+                    </div>
+                </div>
+                <div class="stat-card" id="s2">
+                    <h3>Average Score</h3>
+                    <p><strong>89%</strong></p>
+                    <div>Based on 2 quizzes</div>
+                </div>
+                <div class="stat-card" id="s3">
+                    <h3>Study Streak</h3>
+                    <p><strong>15 days</strong></p>
+                    <div>Keep it up! 🔥</div>
+                </div>
+                <div class="stat-card" id="s4">
+                    <h3>Badges Earned</h3>
+                    <p><strong>3/5</strong></p>
+                    <div>2 more to go!</div>
+                </div>
+            </section>
+
+            <!-- Continue Learning & Recent Activity -->
+            <section class="learning-activity">
+                <div class="continue-learning">
+                    <h2>Continue Learning</h2>
+
+                    <div class="lesson">
+                        <img src="../static/math.jpeg" alt="Math Icon">
+                        <div>
+                            <h4>Introduction to Mathematics</h4>
+                            <p>Mathematics • 45 mins</p>
+                        </div>
+                        <span class="status completed">Completed</span>
+                    </div>
+
+                    <div class="lesson">
+                        <img src="../static/english.jpeg" alt="English Icon">
+                        <div>
+                            <h4>Basic English Grammar</h4>
+                            <p>English • 30 mins</p>
+                        </div>
+                        <span class="status completed">Completed</span>
+                    </div>
+
+                    <div class="lesson" id="computer_lsns">
+                        <img src="../static/computer.jpeg" alt="Computer Icon">
+                        <div>
+                            <h4>Computer Basics</h4>
+                            <p>Computer Science • 60 mins</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+
+                    <div class="activity">
+                        <p>📘 Completed Mathematics Lesson</p>
+                        <small>2 hours ago</small>
+                    </div>
+
+                    <div class="activity">
+                        <p>🏆 Earned "Quiz Master" Badge</p>
+                        <small>1 day ago</small>
+                    </div>
+
+                    <div class="activity">
+                        <p>📈 Reached 15-day Streak</p>
+                        <small>Today</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Access -->
+            <section class="quick-access">
+                <h2>Quick Access</h2>
+                <div class="access-cards">
+                    <div class="access-card" id="lesson_access_card">
+                        <p>📘</p>
+                        <h4>Lessons</h4>
+                    </div>
+                    <div class="access-card" id="quiz_access_card">
+                        <p>🏆</p>
+                        <h4>Quizzes</h4>
+                    </div>
+                    <div class="access-card" id="achievement_access_card">
+                        <p>🎯</p>
+                        <h4>Achievements</h4>
+                    </div>
+                    <div class="access-card" id="bookmark_access_card">
+                        <p>👥</p>
+                        <h4>Bookmarks</h4>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="lessons" id="lessons">
+            <!-- Progress Banner -->
+            <section class="banner">
+                <div class="banner-content">
+                <div class="left">
+                    <h1>
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+                        
+                         Interactive Lessons</h1>
+                    <pre>        Master new concepts with engaging content</pre>
+                    <p>Overall Progress</p>
+                    
+                </div>
+                <div class="right">
+                    <h3 align="right">2/4</h3>
+                    <p>Lessons Completed</p>
+                    <p>50%</p>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Summary -->
+            <section class="stats">
+                <div class="card total">
+                <div>
+                <h4>Total Lessons</h4>
+                <p><strong>4</strong></p>
+                
+                </div>
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+                </div>
+                
+                </div>
+                <div class="card completed">
+                <div>
+                <h4>Completed</h4>
+                <p><strong>2</strong></p>
+                </div>
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                </div>
+                <div class="card in-progress">
+                <div>
+                <h4>In Progress</h4>
+                <p><strong>2</strong></p>
+                </div>
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+                </div>
+                <div class="card bookmarked">
+                <div>
+                <h4>Bookmarked</h4>
+                <p><strong>2</strong></p>
+                </div>
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                </div>
+                </div>
+            </section>
+
+            <!-- Filter Bar -->
+            <section class="filters">
+                <div class="filter-left">
+                <h3>Filter Lessons</h3>
+                <button class="active">All Lessons</button>
+                <button>Completed</button>
+                <button>In Progress</button>
+                </div>
+                <div class="filter-right">
+                <label for="subjects">Subject</label>
+                <select id="subjects">
+                    <option>All Subjects</option>
+                    <option>Mathematics</option>
+                    <option>English</option>
+                    <option>Science</option>
+                </select>
+                </div>
+            </section>
+
+            <!-- Lessons Grid -->
+            <section class="lessons-grid">
+
+                <!-- Lesson Card 1 -->
+                <div class="lesson-card completed">
+                <img src="../static/math.jpeg" alt="Introduction to Mathematics">
+                <span class="badge completed">✓ Completed</span>
+                <span class="bookmark saved">🔖</span>
+                <h4>Introduction to Mathematics</h4>
+                <p>Learn the fundamentals of mathematics with interactive examples</p>
+                <div class="meta">
+                    <span>📘 Mathematics</span>
+                    <span>🟢 Beginner</span>
+                    <span>⏱ 45 mins</span>
+                    <span>⭐⭐⭐⭐☆ (4.5)</span>
+                </div>
+                <button class="review">Review Lesson</button>
+                </div>
+
+                <!-- Lesson Card 2 -->
+                <div class="lesson-card completed">
+                <img src="../static/english.jpeg" alt="Basic English Grammar">
+                <span class="badge completed">✓ Completed</span>
+                <span class="bookmark">🔖</span>
+                <h4>Basic English Grammar</h4>
+                <p>Master English grammar rules and sentence construction</p>
+                <div class="meta">
+                    <span>📘 English</span>
+                    <span>🟢 Beginner</span>
+                    <span>⏱ 30 mins</span>
+                    <span>⭐⭐⭐⭐☆ (4.5)</span>
+                </div>
+                <button class="review">Review Lesson</button>
+                </div>
+
+                <!-- Lesson Card 3 -->
+                <div class="lesson-card">
+                <img src="../static/computer.jpeg" alt="Computer Basics">
+                <span class="bookmark saved">🔖</span>
+                <h4>Computer Basics</h4>
+                <p>Learn computer fundamentals and basic operations</p>
+                <div class="meta">
+                    <span>💻 Computer Science</span>
+                    <span>🟢 Beginner</span>
+                    <span>⏱ 60 mins</span>
+                    <span>⭐⭐⭐⭐☆ (4.5)</span>
+                </div>
+                <button class="start" onclick="redirect_to_lsn()">Start Learning</button>
+                </div>
+
+                <!-- Lesson Card 4 -->
+                <div class="lesson-card">
+                <img src="../static/science.jpg" alt="Science Experiments">
+                <span class="bookmark">🔖</span>
+                <h4>Science Experiments</h4>
+                <p>Hands-on science experiments you can do at home</p>
+                <div class="meta">
+                    <span>🔬 Science</span>
+                    <span>🟡 Intermediate</span>
+                    <span>⏱ 50 mins</span>
+                    <span>⭐⭐⭐⭐☆ (4.5)</span>
+                </div>
+                <button class="start">Start Learning</button>
+                </div>
+
+            </section>
+
+            <!-- Continue Your Learning Journey -->
+            <section class="learning-journey">
+                <h2>Continue Your Learning Journey</h2>
+                <div class="recommendation">
+                <div class="next-lesson">
+                    <h4>Recommended Next</h4>
+                    <p><strong>Advanced Mathematics</strong><br>Building on your progress</p>
+                </div>
+                <div class="streak">
+                    <h4>Study Streak</h4>
+                    <p><strong>🔥 15 Days Strong!</strong><br>Keep going to reach 30 days</p>
+                </div>
+                </div>
+            </section>
+        </div>
+        <div class="quizzes" id="quizzes">
+            <div class="q_welcome">
+                <div class="q_file_question">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                </div>
+                <div class="q_headings">
+                    <h1>Smart Quizzes</h1>
+                    <p>Test your knowledge and Track your progress</p>
+                </div>
+                <div class="q_avg_score">
+                    <p>89%</p>
+                    <p>Average Score</p>
+                </div>
+            </div>
+            <div class="q_progress">
+                <div class="q_p_cards" id="q1">
+                    <div class="q_p_cards_head">
+                        <p>Total Quizzes</p>
+                        <p><strong>3</strong></p>
+                    </div>
+                    <div class="icon-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                    </div>
+                </div>
+                <div class="q_p_cards" id="q2">
+                    <div class="q_p_cards_head">
+                        <p>Completed Quizzes</p>
+                        <p><strong>2</strong></p>
+                    </div>
+                    <div class="icon-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                    </div>
+                </div>
+                <div class="q_p_cards" id="q3">
+                    <div class="q_p_cards_head">
+                        <p>Average Score</p>
+                        <p><strong>89%</strong></p>
+                    </div>
+                    <div class="icon-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target-icon lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </div>
+                </div>
+                <div class="q_p_cards" id="q4">
+                    <div class="q_p_cards_head">
+                        <p>Best Score</p>
+                        <p><strong>92%</strong></p>
+                    </div>
+                    <div class="icon-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy-icon lucide-trophy"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"/><path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978"/><path d="M18 9h1.5a1 1 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6 9H4.5a1 1 0 0 1 0-5H6"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="f_quiz">
+                <div class="f_quiz_left" id="f_quiz_left">
+                    <h3>Filter Quizzes</h3><br>
+                    <div class="f_quiz_2">
+                        <button>All Quizzes</button>
+                        <button>Completed</button>
+                        <button>Available</button>
+                    </div>
+                </div>
+                <div class="filter-right">
+                    <label for="difficulty">Difficulty</label><br>
+                    <select id="difficulty">
+                        <option>All Difficulties</option>
+                        <option>Medium</option>
+                        <option>Easy</option>
+                    </select>
+                </div>
+           
+            </div>
+      <!-- Header -->
+       <div class="performance-board">
+            <div class="performance-header">
+            <div class="icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-icon lucide-brain"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+            </div>
+            <h2>Performance Overview</h2>
+            </div>
+
+            <!-- Performance Overview Section -->
+            <div class="performance" style="flex-direction: row; display: flex; gap: 20px; align-items: flex-start;">
+
+            <!-- Subject Performance -->
+            <div class="sub_perf">
+                <p>Subject Performance</p>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: -10px;">
+                <p>Mathematics</p>
+                <span><strong>85%</strong></span>
+                </div>
+                <div class="progress-bar math-bar">
+                <div class="progress" style="width: 85%;"></div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: -10px;">
+                <p>English</p>
+                <span><strong>92%</strong></span>
+                </div>
+                <div class="progress-bar eng-bar">
+                <div class="progress" style="width: 92%;"></div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: -10px;">
+                <p>Computer Science</p>
+                <span><strong>78%</strong></span>
+                </div>
+                <div class="progress-bar cs-bar">
+                <div class="progress" style="width: 78%;"></div>
+                </div>
+            </div>
+
+            <!-- Difficulty Breakdown -->
+            <div class="breakdown difficulty-breakdown">
+                <p>Difficulty Breakdown</p>
+
+                <div class="difficulty-row">
+                <span>Easy</span>
+                <div class="bar">
+                    <div class="fill green" style="width: 65%;"></div>
+                </div>
+                <div class="count">2</div>
+                </div>
+
+                <div class="difficulty-row">
+                <span>Medium</span>
+                <div class="bar">
+                    <div class="fill yellow" style="width: 40%;"></div>
+                </div>
+                <div class="count">1</div>
+                </div>
+
+                <div class="difficulty-row">
+                <span>Hard</span>
+                <div class="bar">
+                    <div class="fill gray" style="width: 0%;"></div>
+                </div>
+                <div class="count">0</div>
+                </div>
+            </div>
+
+            <!-- Achievement Status -->
+            <div class="achivement">
+                <p>Achievement Status</p>
+                <div style="display: flex; justify-content: space-between;">
+                <div class="a_left">
+                    <p>Quiz Streak</p>
+                    <p>Perfect Scores</p>
+                    <p>Improvement</p>
+                </div>
+                <div class="a_right">
+                    <p>3 days</p>
+                    <p>1</p>
+                    <p>+7%</p>
+                </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+
+            <div  class="quiz_cards">
+                    <div class="quiz_card">
+                        <div class="qc_left">
+                            <div class="circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                            </div>
+                            <h1>Mathematics Quiz 1</h1>
+                            <p>Mathematics</p>
+                            <p>10 questions</p>
+                            <p>Easy</p>
+                            <div class="res">
+                            <button>🏆View Results</button>
+                            </div>
+                        </div>
+                        <div class="q_right">
+                            <span>⏱ 50 mins</span>
+                            <p>🏆85%</p>
+                        </div>
+                    </div>
+                    <div class="quiz_card">
+                        <div class="qc_left">
+                            <div class="circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                            </div>
+                            <h1>English Comprehension</h1>
+                            <p>English</p>
+                            <p>15 questions</p>
+                            <p>Medium</p>
+                            <div class="res">
+                            <a href="{{ url_for('quiz_result', username='dheeraj') }}">
+                              <button>🏆 View Results</button>
+                            </a>
+                            </div>
+                        </div>
+                        <div class="q_right">
+                            <span>⏱ 20 mins</span>
+                            <p>🏆92%</p>
+                        </div>
+                    </div>
+                    <div class="quiz_card">
+                        <div class="qc_left">
+                            <div class="circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                            </div>
+                            <h1>Computer Knowledge Test</h1>
+                            <p>Computer Science</p>
+                            <p>12 questions</p>
+                            <p>Easy</p>
+                            <div class="res">
+                            <a href="{{ url_for('quiz_page') }}"><button>Start Quiz</button></a>
+                            </div>
+                        </div>
+                        <div class="q_right">
+                            <span>⏱ 12 mins</span>
+                        </div>
+                    </div>
+            </div>
+            <div class="qui_start">
+                <h3>Quick start</h3>
+                <div class="practice">
+                    <div class="q_svg_1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target-icon lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </div>
+                    <pre><strong>practice mode </strong>
+Review topics with unlimited attempts</pre>
+                </div>
+                <div class="practice">
+                    <div class="q_svg_3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                    </div>
+                    <pre><strong>Timed Challenge </strong>
+Test your speed and accuracy</pre>
+                </div>
+                <div class="practice">
+                    <div class="q_svg_2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-icon lucide-brain"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+                    </div>
+                    <pre><strong>Adaptive Test </strong>
+Questions adjust to your skill level</pre>
+                </div>
+            </div>  
+        </div>
+        <div class="bookmarks" id="bookmarks">
+            <div class="b_welcome">
+                <div class="b_file_question">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                </div>
+                <div class="b_headings">
+                    <h1>Your Bookmarks</h1>
+                    <p>Quick access to your saved lessons and quizzes</p>
+                </div>
+            </div>
+            <div class="b_status">
+                <div class="b_p_cards">
+                    <div class="b_p_cards_head">
+                        <p>Total Bookmarks</p>
+                        <p>4</p>
+                    </div>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                    </div>
+                </div>
+                <div class="b_p_cards">
+                    <div class="b_p_cards_head">
+                        <p>Bookmarked Lessons</p>
+                        <p>2</p>
+                    </div>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+                    </div>
+                </div>
+                <div class="b_p_cards">
+                    <div class="b_p_cards_head">
+                        <p>Bookmarked Quizzes</p>
+                        <p>2</p>
+                    </div>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+                    </div>
+                </div>
+
+            </div>
+            <div class="b_filters">
+                <div class="circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></svg>
+
+                </div>
+                <h1>Filter Bookmarks</h1>
+                <button>All Bookmarks(4)</button>
+                <button>Lessons(2)</button>
+                <button>Quizzez(2)</button>
+            </div>
+            <div class="all_book">
+                <h1>All Bookmarks</h1>
+                <div class="b_card">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+
+                    </div>
+                    <h1>English Comprehension</h1>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+
+                    </div>
+                    <span>📘English</span>
+                    
+                    <span>15 questions</span>
+                </div>
+                <div class="b_card">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+
+                    </div>
+                    <h1>Introduction to mathematics</h1>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+
+                    </div>
+                    <span>mathematics</span>
+                    
+                    <span>45 mins</span>
+                    <p>Learn the fundamentals of mathematics with interactive examples</p>
+                </div>
+                <div class="b_card">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+
+                    </div>
+                    <h1>Computer Basics</h1>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+
+                    </div>
+                    <span>Computer Science</span>
+                    
+                    <span>60 mins</span>
+                    <p>Learn computer fundamentals and basic operations</p>
+                </div>
+                <div class="b_card">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+
+                    </div>
+                    <h1>Mathematics Quiz 1</h1>
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+
+                    </div>
+                    <span>Mathematics</span>
+                    
+                    <span>10 questions</span>
+                </div>
+
+            </div>
+            <div class="quick_tip">
+                <h1>Quick Tips</h1>
+                <div class="quick_left">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-round-corner-icon lucide-square-round-corner"><path d="M21 11a8 8 0 0 0-8-8"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+
+                    </div>
+                    <h3>Bookmark while learning</h3>
+                    <p>Click the bookmark icon during lessons to save them</p>
+
+                </div>
+                <div class="quick_right">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-round-corner-icon lucide-square-round-corner"><path d="M21 11a8 8 0 0 0-8-8"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+
+                    </div>
+                    <h3>Organize your learning</h3>
+                    <p>Use bookmarks to create your personal study collection</p>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="achievements"  id="achievements">
+
+            <!-- HEADER -->
+            <header class="header">
+            <h1>🏆 Your Achievements</h1>
+            <p>Track your progress and celebrate your success!</p>
+            </header>
+
+            <!-- STREAK SECTION --> 
+            <section class="streak-section">
+            <div class="streak-manager card">
+                <h2>Streak Manager</h2>
+                <div class="streak-stats">
+                <div class="stat">
+                    <div class="icon fire">🔥</div>
+                    <h3>15</h3>
+                    <p>Current Streak (days)</p>
+                </div>
+                <div class="stat">
+                    <div class="icon star">⭐</div>
+                    <h3>28</h3>
+                    <p>Longest Streak (days)</p>
+                </div>
+                </div>
+
+                <div class="last-days">
+                <p>Last 7 Days</p>
+                <div class="days">
+                    <div>Mon ✓</div>
+                    <div>Tue ✓</div>
+                    <div>Wed ✓</div>
+                    <div>Thu ✓</div>
+                    <div>Fri ✓</div>
+                    <div>Sat ✓</div>
+                    <div class="current">Sun 🔥</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="streak-rewards card">
+                <h2>Streak Rewards</h2>
+                <div class="reward unlocked">🎯 7 Days — Unlocked!</div>
+                <div class="reward current">💎 15 Days — Current!</div>
+                <div class="reward locked">👑 30 Days — 15 more days</div>
+            </div>
+            </section>
+
+            <!-- PROGRESS TRACKER -->
+            <section class="progress card">
+            <h2>Progress Tracker</h2>
+            <div class="progress-grid">
+                <div class="lessons">
+                <h3>Lessons Completed (Last 7 Days)</h3>
+                <div class="bar"><span style="width:15%">Mon - 2</span></div>
+                <div class="bar"><span style="width:30%">Tue - 5</span></div>
+                <div class="bar"><span style="width:50%">Wed - 8</span></div>
+                <div class="bar"><span style="width:70%">Thu - 12</span></div>
+                <div class="bar"><span style="width:85%">Fri - 15</span></div>
+                <div class="bar"><span style="width:95%">Sat - 18</span></div>
+                <div class="bar"><span style="width:100%">Sun - 22</span></div>
+                </div>
+
+                <div class="quiz">
+                <h3>Quiz Scores (Last 7 Days)</h3>
+                <div class="bar green"><span style="width:75%">Mon - 75%</span></div>
+                <div class="bar green"><span style="width:80%">Tue - 80%</span></div>
+                <div class="bar green"><span style="width:85%">Wed - 85%</span></div>
+                <div class="bar green"><span style="width:88%">Thu - 88%</span></div>
+                <div class="bar green"><span style="width:90%">Fri - 90%</span></div>
+                <div class="bar green"><span style="width:87%">Sat - 87%</span></div>
+                <div class="bar green"><span style="width:92%">Sun - 92%</span></div>
+                </div>
+            </div>
+            </section>
+
+            <!-- BADGE COLLECTION -->
+            <section class="badges card">
+            <div class="badge-header">
+                <h2>Badge Collection (3/5)</h2>
+                <div class="progress-circle">60% Complete</div>
+            </div>
+            <div class="badge-grid">
+                <div class="badge">
+                <h3>🌟 First Steps</h3>
+                <p>Completed your first lesson</p>
+                <span>Earned: 1/20/2024</span>
+                </div>
+                <div class="badge">
+                <h3>⚡ Quick Learner</h3>
+                <p>Completed 10 lessons in a week</p>
+                <span>Earned: 2/5/2024</span>
+                </div>
+                <div class="badge">
+                <h3>🏆 Quiz Master</h3>
+                <p>Scored 90+ on 5 quizzes</p>
+                <span>Earned: 2/15/2024</span>
+                </div>
+                <div class="badge locked">
+                <h3>🔥 Consistent Learner</h3>
+                <p>Maintain a 30-day streak</p>
+                </div>
+                <div class="badge locked">
+                <h3>🎓 Subject Expert</h3>
+                <p>Master a complete subject</p>
+                </div>
+            </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+    <script src="../static/script.js"></script>
+</html>

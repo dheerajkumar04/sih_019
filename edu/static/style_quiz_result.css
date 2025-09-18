@@ -1,0 +1,86 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.summary p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.questions {
+    margin-top: 30px;
+}
+
+.question-card {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+    transition: all 0.3s ease;
+}
+
+.question-card.correct {
+    border-left: 8px solid #2ecc71;
+    background: #ecf9f1;
+}
+
+.question-card.wrong {
+    border-left: 8px solid #e74c3c;
+    background: #fdecea;
+}
+
+.question-card h2 {
+    color: #34495e;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    background-color: #f2f2f2;
+    transition: 0.2s;
+}
+
+ul li.selected {
+    background-color: #3498db;
+    color: white;
+}
+
+ul li.correct-answer {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.explanation {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #333;
+    background: #f0f8ff;
+    padding: 10px;
+    border-left: 4px solid #3498db;
+    border-radius: 6px;
+}
